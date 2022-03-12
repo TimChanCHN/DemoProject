@@ -1,0 +1,13 @@
+# ignore_files
+
+.vscode/
+Projects/display_tftlcd/MDK-ARM/Listings/*
+Projects/display_tftlcd/MDK-ARM/Objects/*
+Projects/display_tftlcd/MDK-ARM/DebugConfig/*
+Projects/display_tftlcd/MDK-ARM/Project.uvguix.*
+Projects/display_tftlcd/MDK-ARM/EventRecorderStub.*
+Projects/display_tftlcd/MDK-ARM/JLink*
+
+
+*.DS_Store/
+
