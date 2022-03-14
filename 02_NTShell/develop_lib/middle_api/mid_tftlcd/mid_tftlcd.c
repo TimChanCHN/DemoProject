@@ -714,7 +714,6 @@ int LCD_DrawTriangle(driver_info_t *p_drv, triangle_info_t triangle)
     } 
 
     // 三个坐标(x, y), (x+base, y), (x+base, y-height)
-    lcd_dev_t *lcddev = p_drv->lcd_param;
     line_info_t line;
 
     line.width = 1;

@@ -5,6 +5,8 @@
 #include "app_timer.h"
 #include "crc32.h"
 //#include "queue.h"
+#include "ntshell.h"
+#include "ntlibc.h"
 
 #endif
 

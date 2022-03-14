@@ -83,3 +83,32 @@ void ft_uart_put(uint8_t uart_id, char ch)
     {
     }
 }
+
+uint16_t ft_uart_get(uint8_t uart_id)
+{
+    uint16_t data;
+
+    if (FT_UART_1 == uart_id)
+    {
+        /* Place your implementation of fputc here */
+        /* e.g. write a character to the USART */
+        data = USART_ReceiveData(USART2);
+
+        /* Loop until transmit data register is empty */
+        while (USART_GetFlagStatus(USART2, USART_FLAG_RXNE) != RESET)
+        {
+        }
+        return data;
+    }
+
+    /* Place your implementation of fputc here */
+    /* e.g. write a character to the USART */
+    data = USART_ReceiveData(USART2);
+
+    /* Loop until transmit data register is empty */
+    while (USART_GetFlagStatus(USART2, USART_FLAG_RXNE) != RESET)
+    {
+    }
+    return data;
+}
+

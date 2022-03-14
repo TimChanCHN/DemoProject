@@ -16,5 +16,6 @@
 #include "mid_gpio.h"
 #include "mid_systick.h"
 #include "mid_tftlcd.h"
+#include "mid_usart.h"
 
 #endif

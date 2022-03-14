@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>FT32F030x8,USE_STDPERIPH_DRIVER,USE_FT32F030XX_EVAL,USE_DEFAULT_TIMEOUT_CALLBACK,FT32,DEBUG,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\;..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Include;..\..\..\Libraries\CMSIS\Include;..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc;..\..\..\Libraries\FT32F0xx_CPAL_Driver\inc;..\..\..\Utilities\FT32_EVAL\Common;..\..\..\Utilities\FT32_EVAL\FT32F030xx_EVAL;..\..\..\develop_lib\ft_lib\gpio;..\..\..\develop_lib\ft_lib\systick;..\..\..\develop_lib\ft_lib\timer;..\..\..\develop_lib\ft_lib\usart;..\..\..\develop_lib\middle_api\delay;..\..\..\develop_lib\middle_api\mid_gpio;..\..\..\develop_lib\middle_api\mid_systick;..\..\..\develop_lib\middle_api\mid_timer;..\..\..\develop_lib\middle_api\trace;..\..\..\develop_lib\middle_api\queue;..\..\..\develop_lib\ft_lib;..\..\..\develop_lib\middle_api;..\..\..\develop_lib\third_lib;..\..\..\develop_lib\third_lib\app_timer;..\..\..\develop_lib\third_lib\crc32;..\..\..\develop_lib;..\..\..\develop_lib\ft_lib\i2c;..\..\..\develop_lib\ft_lib\flash;..\..\..\develop_lib\ft_lib\timer_pwm;..\..\..\develop_lib\ft_lib\exit;..\..\..\develop_lib\ft_lib\adc;..\..\..\develop_lib\middle_api\tft_8080;..\..\..\develop_lib\middle_api\mid_bk953x;..\..\..\develop_lib\middle_api\mid_flash;..\..\..\develop_lib\middle_api\adc;..\..\..\develop_lib\middle_api\ir;..\..\..\develop_lib\middle_api\pwm;..\..\..\develop_lib\hardware;..\..\..\develop_lib\hardware\bk953x;..\..\..\develop_lib\hardware\ht1621;..\..\..\develop_lib\hardware\st7789;..\..\..\develop_lib\third_lib\app_scheduler;..\app;..\..\..\develop_lib\hardware\st7789;..\..\..\develop_lib\middle_api\mid_tftlcd;..\..\..\develop_lib\ft_lib\FT_Libraries\CMSIS\Include;..\..\..\develop_lib\ft_lib\FT_Libraries\CMSIS\Device\FT\FT32F0xx\Include;..\..\..\develop_lib\ft_lib\FT_Libraries\FT32F0xx_StdPeriph_Driver\inc</IncludePath>
+              <IncludePath>..\;..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Include;..\..\..\Libraries\CMSIS\Include;..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc;..\..\..\Libraries\FT32F0xx_CPAL_Driver\inc;..\..\..\Utilities\FT32_EVAL\Common;..\..\..\Utilities\FT32_EVAL\FT32F030xx_EVAL;..\..\..\develop_lib\ft_lib\gpio;..\..\..\develop_lib\ft_lib\systick;..\..\..\develop_lib\ft_lib\timer;..\..\..\develop_lib\ft_lib\usart;..\..\..\develop_lib\middle_api\delay;..\..\..\develop_lib\middle_api\mid_gpio;..\..\..\develop_lib\middle_api\mid_systick;..\..\..\develop_lib\middle_api\mid_timer;..\..\..\develop_lib\middle_api\trace;..\..\..\develop_lib\middle_api\queue;..\..\..\develop_lib\ft_lib;..\..\..\develop_lib\middle_api;..\..\..\develop_lib\third_lib;..\..\..\develop_lib\third_lib\app_timer;..\..\..\develop_lib\third_lib\crc32;..\..\..\develop_lib;..\..\..\develop_lib\ft_lib\i2c;..\..\..\develop_lib\ft_lib\flash;..\..\..\develop_lib\ft_lib\timer_pwm;..\..\..\develop_lib\ft_lib\exit;..\..\..\develop_lib\ft_lib\adc;..\..\..\develop_lib\middle_api\tft_8080;..\..\..\develop_lib\middle_api\mid_bk953x;..\..\..\develop_lib\middle_api\mid_flash;..\..\..\develop_lib\middle_api\adc;..\..\..\develop_lib\middle_api\ir;..\..\..\develop_lib\middle_api\pwm;..\..\..\develop_lib\hardware;..\..\..\develop_lib\hardware\bk953x;..\..\..\develop_lib\hardware\ht1621;..\..\..\develop_lib\hardware\st7789;..\..\..\develop_lib\third_lib\app_scheduler;..\app;..\..\..\develop_lib\hardware\st7789;..\..\..\develop_lib\middle_api\mid_tftlcd;..\..\..\develop_lib\ft_lib\FT_Libraries\CMSIS\Include;..\..\..\develop_lib\ft_lib\FT_Libraries\CMSIS\Device\FT\FT32F0xx\Include;..\..\..\develop_lib\ft_lib\FT_Libraries\FT32F0xx_StdPeriph_Driver\inc;..\..\..\develop_lib\third_lib\ntshell\core;..\..\..\develop_lib\third_lib\ntshell\util;..\..\..\develop_lib\middle_api\mid_usart</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -408,9 +408,9 @@
               <FilePath>..\ft32f0xx_it.c</FilePath>
             </File>
             <File>
-              <FileName>tft_lcd_handler.c</FileName>
+              <FileName>nt_shell_handler.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\app\tft_lcd_handler.c</FilePath>
+              <FilePath>..\app\nt_shell_handler.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -555,7 +555,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>moddle_api</GroupName>
+          <GroupName>middle_api</GroupName>
           <Files>
             <File>
               <FileName>mid_gpio.c</FileName>
@@ -587,10 +587,57 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\develop_lib\middle_api\mid_tftlcd\mid_tftlcd.c</FilePath>
             </File>
+            <File>
+              <FileName>mid_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\middle_api\mid_usart\mid_usart.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>third_lib</GroupName>
+          <Files>
+            <File>
+              <FileName>ntlibc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\third_lib\ntshell\core\ntlibc.c</FilePath>
+            </File>
+            <File>
+              <FileName>ntshell.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\third_lib\ntshell\core\ntshell.c</FilePath>
+            </File>
+            <File>
+              <FileName>text_editor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\third_lib\ntshell\core\text_editor.c</FilePath>
+            </File>
+            <File>
+              <FileName>text_history.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\third_lib\ntshell\core\text_history.c</FilePath>
+            </File>
+            <File>
+              <FileName>vtrecv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\third_lib\ntshell\core\vtrecv.c</FilePath>
+            </File>
+            <File>
+              <FileName>vtsend.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\third_lib\ntshell\core\vtsend.c</FilePath>
+            </File>
+            <File>
+              <FileName>ntopt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\third_lib\ntshell\util\ntopt.c</FilePath>
+            </File>
+            <File>
+              <FileName>ntstdio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\third_lib\ntshell\util\ntstdio.c</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>
