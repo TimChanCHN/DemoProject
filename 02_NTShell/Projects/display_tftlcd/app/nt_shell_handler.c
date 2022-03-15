@@ -29,8 +29,8 @@ ft_uart_info_t m_uart_info =
     .rx_pin     = GPIO_Pin_10,
     .tx_pin_source  = GPIO_PinSource9,
     .rx_pin_source  = GPIO_PinSource10,
-    .tx_af      = GPIO_AF_0,
-    .rx_af      = GPIO_AF_0,
+    .tx_af      = GPIO_AF_1,
+    .rx_af      = GPIO_AF_1,
 };
 
 static usart_object_t m_usart_obj = 
@@ -79,7 +79,7 @@ static int func_callback(const char *text, void *extobj)
 int init_ntshell(void)
 {
     usart_init(&m_usart_obj);
-
+    // usart_put_string(&m_usart_obj, "Hello world.\r\n");
     ntshell_init(
         &ntshell,
         func_read,
@@ -87,7 +87,7 @@ int init_ntshell(void)
         func_callback,
         (void *)&ntshell);
 
-    ntshell_set_prompt(&ntshell, "BlueTank>");
+    ntshell_set_prompt(&ntshell, "ntshell>");
     ntshell_execute(&ntshell);
     return 0;
 }

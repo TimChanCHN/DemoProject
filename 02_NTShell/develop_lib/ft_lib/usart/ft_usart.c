@@ -63,25 +63,26 @@ void ft_uart_put(uint8_t uart_id, char ch)
 
     if (FT_UART_1 == uart_id)
     {
-        /* Place your implementation of fputc here */
-        /* e.g. write a character to the USART */
-        USART_SendData(USART2, (uint8_t)ch);
-
         /* Loop until transmit data register is empty */
         while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET)
         {
         }
+
+        /* Place your implementation of fputc here */
+        /* e.g. write a character to the USART */
+        USART_SendData(USART2, (uint8_t)ch);
         return;
     }
 
-    /* Place your implementation of fputc here */
-    /* e.g. write a character to the USART */
-    USART_SendData(USART1, (uint8_t)ch);
 
     /* Loop until transmit data register is empty */
     while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
     {
     }
+
+    /* Place your implementation of fputc here */
+    /* e.g. write a character to the USART */
+    USART_SendData(USART1, (uint8_t)ch);
 }
 
 uint16_t ft_uart_get(uint8_t uart_id)
@@ -90,25 +91,25 @@ uint16_t ft_uart_get(uint8_t uart_id)
 
     if (FT_UART_1 == uart_id)
     {
-        /* Place your implementation of fputc here */
-        /* e.g. write a character to the USART */
-        data = USART_ReceiveData(USART2);
-
-        /* Loop until transmit data register is empty */
-        while (USART_GetFlagStatus(USART2, USART_FLAG_RXNE) != RESET)
+        /* Loop until receive data register is not empty */
+        while (USART_GetFlagStatus(USART2, USART_FLAG_RXNE) == RESET)
         {
         }
+
+        /* Place your implementation of fgetc here */
+        /* e.g. write a character to the USART */
+        data = USART_ReceiveData(USART2);
         return data;
+    }
+
+    /* Loop until receive data register is not empty */
+    while (USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET)
+    {
     }
 
     /* Place your implementation of fputc here */
     /* e.g. write a character to the USART */
-    data = USART_ReceiveData(USART2);
-
-    /* Loop until transmit data register is empty */
-    while (USART_GetFlagStatus(USART2, USART_FLAG_RXNE) != RESET)
-    {
-    }
+    data = USART_ReceiveData(USART1);
     return data;
 }
 

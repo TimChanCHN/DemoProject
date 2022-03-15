@@ -157,130 +157,57 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>508</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134218904</Address>
+          <LineNumber>66</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134223682</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>E:\宸ヤ綔\00_涓汉椤圭洰\01_瑙勫垝椤圭洰\00_Git\mcu_gui\02_ST7789_newlib_ok\develop_lib\middle_api\mid_tftlcd\mid_tftlcd.c</Filename>
+          <Filename>E:\宸ヤ綔\00_涓汉椤圭洰\01_瑙勫垝椤圭洰\00_Git\DemoProject\02_NTShell\develop_lib\middle_api\mid_usart\mid_usart.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\FT32F0XX\../../../develop_lib/middle_api/mid_tftlcd/mid_tftlcd.c\508</Expression>
+          <Expression>\\FT32F0XX\../../../develop_lib/middle_api/mid_usart/mid_usart.c\66</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>514</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134218950</Address>
+          <LineNumber>109</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134221938</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>E:\宸ヤ綔\00_涓汉椤圭洰\01_瑙勫垝椤圭洰\00_Git\mcu_gui\02_ST7789_newlib_ok\develop_lib\middle_api\mid_tftlcd\mid_tftlcd.c</Filename>
+          <Filename>E:\宸ヤ綔\00_涓汉椤圭洰\01_瑙勫垝椤圭洰\00_Git\DemoProject\02_NTShell\develop_lib\ft_lib\usart\ft_usart.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\FT32F0XX\../../../develop_lib/middle_api/mid_tftlcd/mid_tftlcd.c\514</Expression>
+          <Expression>\\FT32F0XX\../../../develop_lib/ft_lib/usart/ft_usart.c\109</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>520</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134218994</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>E:\宸ヤ綔\00_涓汉椤圭洰\01_瑙勫垝椤圭洰\00_Git\mcu_gui\02_ST7789_newlib_ok\develop_lib\middle_api\mid_tftlcd\mid_tftlcd.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\FT32F0XX\../../../develop_lib/middle_api/mid_tftlcd/mid_tftlcd.c\520</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>526</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134219040</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>E:\宸ヤ綔\00_涓汉椤圭洰\01_瑙勫垝椤圭洰\00_Git\mcu_gui\02_ST7789_newlib_ok\develop_lib\middle_api\mid_tftlcd\mid_tftlcd.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\FT32F0XX\../../../develop_lib/middle_api/mid_tftlcd/mid_tftlcd.c\526</Expression>
-        </Bp>
-        <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
-          <LineNumber>584</LineNumber>
+          <LineNumber>112</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134219578</Address>
+          <Address>134221952</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>E:\宸ヤ綔\00_涓汉椤圭洰\01_瑙勫垝椤圭洰\00_Git\mcu_gui\02_ST7789_newlib_ok\develop_lib\middle_api\mid_tftlcd\mid_tftlcd.c</Filename>
+          <Filename>E:\宸ヤ綔\00_涓汉椤圭洰\01_瑙勫垝椤圭洰\00_Git\DemoProject\02_NTShell\develop_lib\ft_lib\usart\ft_usart.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\FT32F0XX\../../../develop_lib/middle_api/mid_tftlcd/mid_tftlcd.c\584</Expression>
-        </Bp>
-        <Bp>
-          <Number>5</Number>
-          <Type>0</Type>
-          <LineNumber>574</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134219540</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>E:\宸ヤ綔\00_涓汉椤圭洰\01_瑙勫垝椤圭洰\00_Git\mcu_gui\02_ST7789_newlib_ok\develop_lib\middle_api\mid_tftlcd\mid_tftlcd.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\FT32F0XX\../../../develop_lib/middle_api/mid_tftlcd/mid_tftlcd.c\574</Expression>
+          <Expression>\\FT32F0XX\../../../develop_lib/ft_lib/usart/ft_usart.c\112</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>SPI_InitStructure</ItemText>
-        </Ww>
-        <Ww>
-          <count>1</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Rx1Buffer</ItemText>
-        </Ww>
-        <Ww>
-          <count>2</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>TimerPeriod_env,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>3</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Channel1Pulse_env,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>4</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>p_rect</ItemText>
-        </Ww>
-        <Ww>
-          <count>5</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>x_end</ItemText>
+          <ItemText>uart_info</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
