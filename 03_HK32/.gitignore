@@ -1,0 +1,13 @@
+# ignore_files
+
+.vscode/
+Projects/hk32demo/MDK-ARM/Listings/*
+Projects/hk32demo/MDK-ARM/Objects/*
+Projects/hk32demo/MDK-ARM/DebugConfig/*
+Projects/hk32demo/MDK-ARM/Project.uvguix.*
+Projects/hk32demo/MDK-ARM/EventRecorderStub.*
+Projects/hk32demo/MDK-ARM/JLink*
+
+
+*.DS_Store/
+
