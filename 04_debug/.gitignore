@@ -1,0 +1,13 @@
+# ignore_files
+
+.vscode/
+Projects/newlib/MDK-ARM/Listings/*
+Projects/newlib/MDK-ARM/Objects/*
+Projects/newlib/MDK-ARM/DebugConfig/*
+Projects/newlib/MDK-ARM/Project.uvguix.*
+Projects/newlib/MDK-ARM/EventRecorderStub.*
+Projects/newlib/MDK-ARM/JLink*
+
+
+*.DS_Store/
+
