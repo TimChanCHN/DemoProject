@@ -14,7 +14,11 @@
  */
 #ifdef  FT32
 #include "ft32f0xx.h"
+#elif defined(HK32F103)
+#include "stm32f10x.h"
+#endif
 
+#if (defined FT32) || (defined HK32F103)
 /* GPIO */
 #define LCD_BACK_LIGHT_PIN              GPIO_Pin_4
 #define LCD_BACK_LIGHT_PORT             GPIOB

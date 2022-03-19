@@ -138,7 +138,7 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -336,9 +336,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER,USE_DEFAULT_TIMEOUT_CALLBACK,DEBUG,HK32, HK32F103</Define>
+              <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER,USE_DEFAULT_TIMEOUT_CALLBACK,DEBUG,F1, HK32F103</Define>
               <Undefine></Undefine>
-              <IncludePath>..\;..\..\..\develop_lib\middle_api\delay;..\..\..\develop_lib\middle_api\mid_gpio;..\..\..\develop_lib\middle_api\mid_systick;..\..\..\develop_lib\middle_api\mid_timer;..\..\..\develop_lib\middle_api\trace;..\..\..\develop_lib\middle_api\queue;..\..\..\develop_lib\middle_api;..\..\..\develop_lib\third_lib;..\..\..\develop_lib\third_lib\app_timer;..\..\..\develop_lib\third_lib\crc32;..\..\..\develop_lib;..\..\..\develop_lib\middle_api\tft_8080;..\..\..\develop_lib\middle_api\mid_flash;..\..\..\develop_lib\middle_api\adc;..\..\..\develop_lib\middle_api\ir;..\..\..\develop_lib\middle_api\pwm;..\..\..\develop_lib\hardware;..\..\..\develop_lib\hardware\st7789;..\..\..\develop_lib\third_lib\app_scheduler;..\app;..\..\..\develop_lib\hardware\st7789;..\..\..\develop_lib\middle_api\mid_tftlcd;..\..\..\develop_lib\third_lib\ntshell\core;..\..\..\develop_lib\third_lib\ntshell\util;..\..\..\develop_lib\third_lib\queue;..\..\..\develop_lib\hk_lib;..\..\..\develop_lib\hk_lib\HK32F103\STM32F10x_StdPeriph_Driver\inc;..\..\..\develop_lib\hk_lib\HK32F103\CMSIS\CM3\CoreSupport;..\..\..\develop_lib\hk_lib\HK32F103\CMSIS\CM3\DeviceSupport\ST\STM32F10x;..\..\..\develop_lib\hk_lib\HK32F1_lib\gpio;..\..\..\develop_lib\hk_lib\HK32F1_lib\systick;..\..\..\develop_lib\hk_lib\HK32F1_lib</IncludePath>
+              <IncludePath>..\;..\app;..\..\..\develop_lib;..\..\..\develop_lib\third_lib;..\..\..\develop_lib\third_lib\crc32;..\..\..\develop_lib\third_lib\queue;..\..\..\develop_lib\third_lib\app_timer;..\..\..\develop_lib\third_lib\ntshell\util;..\..\..\develop_lib\third_lib\ntshell\core;..\..\..\develop_lib\third_lib\app_scheduler;..\..\..\develop_lib\hardware;..\..\..\develop_lib\hardware\st7789;..\..\..\develop_lib\hk_lib;..\..\..\develop_lib\hk_lib\HK32F103\CMSIS\CM3\CoreSupport;..\..\..\develop_lib\hk_lib\HK32F103\STM32F10x_StdPeriph_Driver\inc;..\..\..\develop_lib\hk_lib\HK32F103\CMSIS\CM3\DeviceSupport\ST\STM32F10x;..\..\..\develop_lib\middle_api_new;..\..\..\develop_lib\middle_api_new\adc;..\..\..\develop_lib\middle_api_new\delay;..\..\..\develop_lib\middle_api_new\ir;..\..\..\develop_lib\middle_api_new\mid_bk953x;..\..\..\develop_lib\middle_api_new\mid_flash;..\..\..\develop_lib\middle_api_new\mid_gpio;..\..\..\develop_lib\middle_api_new\mid_tftlcd;..\..\..\develop_lib\middle_api_new\trace;..\..\..\develop_lib\Fx_api\F1_api;..\..\..\develop_lib\Fx_api\F1_api\gpio</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -391,6 +391,11 @@
               <FileName>startup_stm32f10x_hd.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\..\..\develop_lib\hk_lib\HK32F103\CMSIS\CM3\DeviceSupport\ST\STM32F10x\startup\startup_stm32f10x_hd.s</FilePath>
+            </File>
+            <File>
+              <FileName>core_cm3.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\hk_lib\HK32F103\CMSIS\CM3\CoreSupport\core_cm3.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -531,36 +536,19 @@
         </Group>
         <Group>
           <GroupName>hardware</GroupName>
-          <Files>
-            <File>
-              <FileName>st7789.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\develop_lib\hardware\st7789\st7789.c</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>middle_api</GroupName>
           <Files>
             <File>
+              <FileName>mid_tftlcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\middle_api_new\mid_tftlcd\mid_tftlcd.c</FilePath>
+            </File>
+            <File>
               <FileName>mid_gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\develop_lib\middle_api\mid_gpio\mid_gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>trace.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\develop_lib\middle_api\trace\trace.c</FilePath>
-            </File>
-            <File>
-              <FileName>mid_delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\develop_lib\middle_api\delay\mid_delay.c</FilePath>
-            </File>
-            <File>
-              <FileName>mid_systick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\develop_lib\middle_api\mid_systick\mid_systick.c</FilePath>
+              <FilePath>..\..\..\develop_lib\middle_api_new\mid_gpio\mid_gpio.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -610,20 +598,12 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>hk_lib</GroupName>
-        </Group>
-        <Group>
           <GroupName>f1_lib</GroupName>
           <Files>
             <File>
-              <FileName>f1_systick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\develop_lib\hk_lib\HK32F1_lib\systick\f1_systick.c</FilePath>
-            </File>
-            <File>
               <FileName>f1_gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\develop_lib\hk_lib\HK32F1_lib\gpio\f1_gpio.c</FilePath>
+              <FilePath>..\..\..\develop_lib\Fx_api\F1_api\gpio\f1_gpio.c</FilePath>
             </File>
           </Files>
         </Group>

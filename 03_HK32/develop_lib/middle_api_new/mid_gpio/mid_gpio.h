@@ -5,6 +5,10 @@
 #include "f0_lib.h"
 #endif
 
+#ifdef F1
+#include "f1_lib.h"
+#endif
+
 typedef enum
 {
     GPIO_DIR_OUTPUR,
@@ -13,15 +17,11 @@ typedef enum
 
 typedef struct
 {
-#ifdef FT32
+#if (defined F0) || (defined F1)
     uint32_t        gpio_port_periph_clk;
     GPIO_TypeDef    *p_gpio_port;
 #endif
 
-#ifdef HK32
-    uint32_t        gpio_port_periph_clk;
-    GPIO_TypeDef    *p_gpio_port;
-#endif
     uint32_t    gpio_pin;
     gpio_dir_e  gpio_dir;
     uint32_t    flag;

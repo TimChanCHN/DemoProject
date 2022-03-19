@@ -11,7 +11,7 @@
 //#include "ht1621.h"
 //#include "seg_code.h"
 
-#include "kt0646.h"
-#include "kt0656.h"
+//#include "kt0646.h"
+//#include "kt0656.h"
 
 #endif
