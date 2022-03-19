@@ -11,10 +11,10 @@
 //#include "ir_tx_encode.h"
 //#include "ir_rx_decode.h"
 //#include "mid_timer.h"
-// #include "mid_delay.h"
+#include "mid_delay.h"
 //#include "mid_adc.h"
 #include "mid_gpio.h"
-// #include "mid_systick.h"
+#include "mid_systick.h"
 // #include "mid_usart.h"
 
 // #include "mid_kt0656.h"

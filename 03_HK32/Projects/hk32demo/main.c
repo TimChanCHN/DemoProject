@@ -10,11 +10,15 @@ static gpio_object_t m_gpio_led =
 
 int main(void)
 {
+	mid_system_tick_init();
 	gpio_config(&m_gpio_led);
 
 	while(1)
 	{
 		gpio_output_set(&m_gpio_led, 0);
+		delay_ms(1000);
+		gpio_output_set(&m_gpio_led, 1);
+		delay_ms(1000);
 	}
 
 }
