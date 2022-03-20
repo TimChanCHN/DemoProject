@@ -9,12 +9,27 @@ static gpio_object_t m_gpio_led =
 	.gpio_dir				= GPIO_DIR_OUTPUR,
 };
 
+static gpio_object_t m_backlight = 
+{
+	.gpio_port_periph_clk 	= RCC_APB2Periph_GPIOB,
+	.p_gpio_port			= GPIOB,
+	.gpio_pin				= GPIO_Pin_12,
+	.gpio_dir				= GPIO_DIR_OUTPUR,
+};
+
+
+// Black Light-->PB12
+// RST --> PB6
 int main(void)
 {
 	mid_system_tick_init();
 	gpio_config(&m_gpio_led);
 
-	init_ntshell();
+	// gpio_config(&m_backlight);
+	// gpio_output_set(&m_backlight, 0);
+
+	LCD_Init();
+	// init_ntshell();
 
 	while(1)
 	{
