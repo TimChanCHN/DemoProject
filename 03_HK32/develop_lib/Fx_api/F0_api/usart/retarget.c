@@ -29,7 +29,7 @@ int fputc(int ch, FILE *p_file)
 {
   UNUSED_PARAMETER(p_file);
 
-  UNUSED_VARIABLE(f0_uart_put(F0_UART_0, (uint8_t)ch));
+  UNUSED_VARIABLE(f0_uart_put(F0_UART_1, (uint8_t)ch));
 
   return ch;
 }
