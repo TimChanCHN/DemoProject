@@ -1,4 +1,5 @@
 #include "board_config.h"
+#include "nt_shell_handler.h"
 
 static gpio_object_t m_gpio_led = 
 {
@@ -12,6 +13,8 @@ int main(void)
 {
 	mid_system_tick_init();
 	gpio_config(&m_gpio_led);
+
+	init_ntshell();
 
 	while(1)
 	{

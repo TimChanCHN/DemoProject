@@ -6,7 +6,7 @@
 
 static ntshell_t ntshell;
 
-ft_uart_config_t m_uart_config = 
+f1_uart_config_t m_uart_config = 
 {
     .baudrate   = 115200,
     .databits   = USART_WordLength_8b,            // 8位数据位
@@ -16,26 +16,23 @@ ft_uart_config_t m_uart_config =
     .mode       = USART_Mode_Rx|USART_Mode_Tx,
 };
 
-ft_uart_info_t m_uart_info = 
+f1_uart_info_t m_uart_info = 
 {
     .uart       = USART1,
     .tx_port    = GPIOA,
     .rx_port    = GPIOA,
 
     .clk        = RCC_APB2Periph_USART1,
-    .tx_clk     = RCC_AHBPeriph_GPIOA,
-    .rx_clk     = RCC_AHBPeriph_GPIOA,
+    .tx_clk     = RCC_APB2Periph_GPIOA,
+    .rx_clk     = RCC_APB2Periph_GPIOA,
     .tx_pin     = GPIO_Pin_9,
     .rx_pin     = GPIO_Pin_10,
-    .tx_pin_source  = GPIO_PinSource9,
-    .rx_pin_source  = GPIO_PinSource10,
-    .tx_af      = GPIO_AF_1,
-    .rx_af      = GPIO_AF_1,
+
+    .uart_id    = F1_UART_1,
 };
 
 static usart_object_t m_usart_obj = 
 {
-    .id = 0,
     .uart_info = &m_uart_info,
     .uart_config = &m_uart_config,
 };
