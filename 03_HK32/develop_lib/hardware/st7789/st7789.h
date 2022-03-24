@@ -17,9 +17,6 @@
 #define CMD_SETX    0x2A
 #define CMD_SETY    0x2B
 
-// #define LED_EN
-// #define LED_PWM
-
 
 int st7789_send_byte(lcd_drv_t *p_dev, uint8_t data);
 int st7789_write_cmd(lcd_drv_t *p_dev, uint8_t cmd);

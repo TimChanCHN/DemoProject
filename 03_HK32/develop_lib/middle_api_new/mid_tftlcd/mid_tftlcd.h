@@ -9,11 +9,6 @@
 // #include "ft32f0xx.h"
 
 
-#define RECT_X_START    120         // 动态显示框左边坐标
-#define RECT_X_END      275         // 动态显示框右边坐标
-#define RECT_LINE_WIDTH 3           // 动态显示边框宽度
-
-
 //画笔颜色
 #define WHITE         	 0xFFFF
 #define BLACK         	 0x0000	  
@@ -51,8 +46,20 @@ typedef struct
 }lcd_dev_t;
 
 
-// LCD Driver config
-typedef struct 
+// LCD 地址结构体，只对FSMC有用
+typedef struct
+{
+	uint8_t LCD_REG;
+	uint8_t LCD_RAM;
+} LCD_Type_8b_t;
+
+typedef struct
+{
+	uint16_t LCD_REG;
+	uint16_t LCD_RAM;
+} LCD_Type_16b_t;
+
+typedef struct
 {
     gpio_object_t   cs_pin;
     gpio_object_t   rst_pin;
@@ -60,8 +67,6 @@ typedef struct
     gpio_object_t   wr_pin;
     gpio_object_t   rd_pin;
 
-    #ifdef PARALLEL_PORT
-    
     #ifndef LCD_DEBUG
     gpio_object_t   db[8];
     GPIO_TypeDef *  db_port;         // 设计中需要使用同一个端口(Px0~Px8)
@@ -76,23 +81,26 @@ typedef struct
     gpio_object_t   db7;
     #endif
 
-    #elif   SERIAL_IIC
-    gpio_object_t   iic_scl;
-    gpio_object_t   iic_sda;
+}ctrl_type_gpio_t;                  // GPIO控制
 
-    #elif   SERIAL_SPI
-    gpio_object_t   spi_cs;
-    gpio_object_t   spi_clk;
-    gpio_object_t   spi_in;
-    gpio_object_t   spi_out;
-    #endif
+// TODO: 不同的MCU的FSMC分布不一样，若更换平台，需要对此处进行修改
+typedef struct 
+{
+    gpio_object_t   rst_pin;
+    gpio_object_t   back_light;
+    gpio_object_t   fsmc_pin1;      // FSMC port D
+    gpio_object_t   fsmc_pin2;      // FSMC port E
+}ctrl_type_fsmc_t;                  // FSMC控制
 
-    #ifdef LED_EN
-    gpio_object_t   led_en;
-    #endif
 
-    #ifdef LED_PWM
-    gpio_object_t   led_pwm;
+// LCD Driver config
+typedef struct 
+{
+    ctrl_type_gpio_t ctrl_gpio;
+    #ifdef F0
+    ctrl_type_gpio_t ctrl_gpio;
+    #elif defined F1
+    ctrl_type_fsmc_t ctrl_fsmc;
     #endif
 }lcd_drv_t;
 

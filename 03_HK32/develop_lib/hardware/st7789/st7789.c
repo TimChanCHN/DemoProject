@@ -4,8 +4,8 @@ int st7789_send_byte(lcd_drv_t *p_dev, uint8_t data)
 {
     IS_NULL(p_dev);
     #ifndef LCD_DEBUG
-    p_dev->db_port->BSRR = (data & 0xFF);
-    p_dev->db_port->BRR  = (~(data) & 0xFF);
+    p_dev->ctrl_gpio.db_port->BSRR = (data & 0xFF);
+    p_dev->ctrl_gpio.db_port->BRR  = (~(data) & 0xFF);
 
     #else
     GPIOB->BSRR &= ~(0x0f << 12);
@@ -31,12 +31,12 @@ int st7789_write_cmd(lcd_drv_t *p_dev, uint8_t cmd)
 {
     IS_NULL(p_dev);
 
-    gpio_output_set(&p_dev->cs_pin, 0);
-    gpio_output_set(&p_dev->rs_pin, 0);             // rs = 0, send cmd
-    gpio_output_set(&p_dev->wr_pin, 0);
+    gpio_output_set(&p_dev->ctrl_gpio.cs_pin, 0);
+    gpio_output_set(&p_dev->ctrl_gpio.rs_pin, 0);             // rs = 0, send cmd
+    gpio_output_set(&p_dev->ctrl_gpio.wr_pin, 0);
     st7789_send_byte(p_dev, cmd);
-    gpio_output_set(&p_dev->wr_pin, 1);
-    gpio_output_set(&p_dev->cs_pin, 1);
+    gpio_output_set(&p_dev->ctrl_gpio.wr_pin, 1);
+    gpio_output_set(&p_dev->ctrl_gpio.cs_pin, 1);
 	
 	return 0;
 }
@@ -45,12 +45,12 @@ int st7789_write_data(lcd_drv_t *p_dev, uint8_t data)
 {
     IS_NULL(p_dev);
 
-    gpio_output_set(&p_dev->cs_pin, 0);
-    gpio_output_set(&p_dev->rs_pin, 1);             // rs = 1, send data
-    gpio_output_set(&p_dev->wr_pin, 0);
+    gpio_output_set(&p_dev->ctrl_gpio.cs_pin, 0);
+    gpio_output_set(&p_dev->ctrl_gpio.rs_pin, 1);             // rs = 1, send data
+    gpio_output_set(&p_dev->ctrl_gpio.wr_pin, 0);
     st7789_send_byte(p_dev, data);
-    gpio_output_set(&p_dev->wr_pin, 1);
-    gpio_output_set(&p_dev->cs_pin, 1);
+    gpio_output_set(&p_dev->ctrl_gpio.wr_pin, 1);
+    gpio_output_set(&p_dev->ctrl_gpio.cs_pin, 1);
 	
 	return 0;
 }
@@ -59,17 +59,17 @@ int st7789_write_burst_data(lcd_drv_t *p_dev, uint8_t *buff, uint16_t count)
 {
     IS_NULL(p_dev);
 
-    gpio_output_set(&p_dev->cs_pin, 0);
-    gpio_output_set(&p_dev->rs_pin, 1);             // rs = 1, send data
+    gpio_output_set(&p_dev->ctrl_gpio.cs_pin, 0);
+    gpio_output_set(&p_dev->ctrl_gpio.rs_pin, 1);             // rs = 1, send data
 
     for (uint16_t i = 0; i < count; i++)
     {
-        gpio_output_set(&p_dev->wr_pin, 0);
+        gpio_output_set(&p_dev->ctrl_gpio.wr_pin, 0);
         st7789_send_byte(p_dev, buff[i]);
-        gpio_output_set(&p_dev->wr_pin, 1);
+        gpio_output_set(&p_dev->ctrl_gpio.wr_pin, 1);
     }
-    gpio_output_set(&p_dev->wr_pin, 1);
-    gpio_output_set(&p_dev->cs_pin, 1);
+    gpio_output_set(&p_dev->ctrl_gpio.wr_pin, 1);
+    gpio_output_set(&p_dev->ctrl_gpio.cs_pin, 1);
 	
 	return 0;
 }
@@ -80,43 +80,43 @@ int st7789_init(driver_info_t *p_drv)
     lcd_drv_t *p_dev = p_drv->dev;
 
     #ifdef  LCD_DEBUG
-    gpio_config(&p_dev->db0);
-    gpio_config(&p_dev->db1);
-    gpio_config(&p_dev->db2);
-    gpio_config(&p_dev->db3);
-    gpio_config(&p_dev->db4);
-    gpio_config(&p_dev->db5);
-    gpio_config(&p_dev->db6);
-    gpio_config(&p_dev->db7);
+    gpio_config(&p_dev->ctrl_gpio.db0);
+    gpio_config(&p_dev->ctrl_gpio.db1);
+    gpio_config(&p_dev->ctrl_gpio.db2);
+    gpio_config(&p_dev->ctrl_gpio.db3);
+    gpio_config(&p_dev->ctrl_gpio.db4);
+    gpio_config(&p_dev->ctrl_gpio.db5);
+    gpio_config(&p_dev->ctrl_gpio.db6);
+    gpio_config(&p_dev->ctrl_gpio.db7);
 
-    gpio_output_set(&p_dev->db0, 0);
-    gpio_output_set(&p_dev->db1, 0);
-    gpio_output_set(&p_dev->db2, 0);
-    gpio_output_set(&p_dev->db3, 0);
-    gpio_output_set(&p_dev->db4, 0);
-    gpio_output_set(&p_dev->db5, 0);
-    gpio_output_set(&p_dev->db6, 0);
-    gpio_output_set(&p_dev->db7, 0);
+    gpio_output_set(&p_dev->ctrl_gpio.db0, 0);
+    gpio_output_set(&p_dev->ctrl_gpio.db1, 0);
+    gpio_output_set(&p_dev->ctrl_gpio.db2, 0);
+    gpio_output_set(&p_dev->ctrl_gpio.db3, 0);
+    gpio_output_set(&p_dev->ctrl_gpio.db4, 0);
+    gpio_output_set(&p_dev->ctrl_gpio.db5, 0);
+    gpio_output_set(&p_dev->ctrl_gpio.db6, 0);
+    gpio_output_set(&p_dev->ctrl_gpio.db7, 0);
     #else
 
     for (uint8_t i = 0; i < 8; i++)
     {
-        gpio_config(&p_dev->db[i]);
-        gpio_output_set(&p_dev->db[i], 0);
+        gpio_config(&p_dev->ctrl_gpio.db[i]);
+        gpio_output_set(&p_dev->ctrl_gpio.db[i], 0);
     }
     #endif
 
-    gpio_config(&p_dev->cs_pin);
-    gpio_config(&p_dev->rst_pin);
-    gpio_config(&p_dev->rs_pin);
-    gpio_config(&p_dev->wr_pin);
-    gpio_config(&p_dev->rd_pin);
+    gpio_config(&p_dev->ctrl_gpio.cs_pin);
+    gpio_config(&p_dev->ctrl_gpio.rst_pin);
+    gpio_config(&p_dev->ctrl_gpio.rs_pin);
+    gpio_config(&p_dev->ctrl_gpio.wr_pin);
+    gpio_config(&p_dev->ctrl_gpio.rd_pin);
 
-    gpio_output_set(&p_dev->cs_pin, 1);
-    gpio_output_set(&p_dev->rst_pin, 1);
-    gpio_output_set(&p_dev->rs_pin, 1);
-    gpio_output_set(&p_dev->wr_pin, 1);
-    gpio_output_set(&p_dev->rd_pin, 1);
+    gpio_output_set(&p_dev->ctrl_gpio.cs_pin, 1);
+    gpio_output_set(&p_dev->ctrl_gpio.rst_pin, 1);
+    gpio_output_set(&p_dev->ctrl_gpio.rs_pin, 1);
+    gpio_output_set(&p_dev->ctrl_gpio.wr_pin, 1);
+    gpio_output_set(&p_dev->ctrl_gpio.rd_pin, 1);
 
 
     st7789_write_cmd(p_dev, 0x36);      // 显示扫描方向

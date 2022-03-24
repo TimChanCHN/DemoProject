@@ -7,6 +7,9 @@
 
 #include "stdbool.h"
 
+#define MODE_OUTPUT_INPUT   0
+#define MODE_AF             1
+
 void conf_gpio_output(uint32_t ahbperiph, GPIO_TypeDef *gpio_port, uint32_t gpio_pin);
 
 void set_gpio_value(GPIO_TypeDef *gpio_port , uint32_t gpio_pin ,uint8_t value);
@@ -26,5 +29,9 @@ void get_halt_gpios_value(GPIO_TypeDef *gpio_port ,bool lsb, uint8_t *p_value);
 void output_shift_to_input(GPIO_TypeDef *gpio_port, uint16_t gpio_pin);
 
 void input_shift_to_output(GPIO_TypeDef *gpio_port, uint16_t gpio_pin);
+
+void conf_gpio_af(uint32_t ahbperiph, GPIO_TypeDef *gpio_port, uint16_t gpio_pins);
+
+void conf_whole_gpios_af(uint32_t ahbperiph, GPIO_TypeDef *gpio_port, uint16_t gpio_pins);
 
 #endif

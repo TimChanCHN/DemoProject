@@ -218,3 +218,35 @@ void input_shift_to_output(GPIO_TypeDef *gpio_port, uint16_t gpio_pin)
     GPIO_Init(gpio_port, &GPIO_InitStructure);
 }
 
+
+/**
+ * @brief 配置GPIO复用
+ */
+void conf_gpio_af(uint32_t ahbperiph, GPIO_TypeDef *gpio_port, uint16_t gpio_pins)
+{
+    GPIO_InitTypeDef        GPIO_InitStructure;
+
+    RCC_APB2PeriphClockCmd(ahbperiph, ENABLE);
+
+    GPIO_InitStructure.GPIO_Pin   = gpio_pins;
+    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    
+    GPIO_Init(gpio_port, &GPIO_InitStructure);
+}
+
+/**
+ * @brief 配置整组GPIO复用
+ */
+void conf_whole_gpios_af(uint32_t ahbperiph, GPIO_TypeDef *gpio_port, uint16_t gpio_pins)
+{
+    GPIO_InitTypeDef        GPIO_InitStructure;
+
+    RCC_APB2PeriphClockCmd(ahbperiph, ENABLE);
+
+    GPIO_InitStructure.GPIO_Pin   = gpio_pins;
+    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    
+    GPIO_Init(gpio_port, &GPIO_InitStructure);
+}

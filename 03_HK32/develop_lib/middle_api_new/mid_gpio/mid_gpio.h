@@ -24,7 +24,7 @@ typedef struct
 
     uint32_t    gpio_pin;
     gpio_dir_e  gpio_dir;
-    uint32_t    flag;
+    uint32_t    flag;           // 用作是否复用的标志，0--无复用，1--有复用
 } gpio_object_t;
 
 int gpio_config(gpio_object_t *p_gpio_object);
