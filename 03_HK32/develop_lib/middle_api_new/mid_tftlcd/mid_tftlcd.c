@@ -13,7 +13,7 @@
 int LCD_Param_Setting(driver_info_t *p_drv)
 {
     IS_NULL(p_drv);
-#if 0
+
     p_drv->write_cmd(p_drv->dev, p_drv->lcd_param->setxcmd);
     p_drv->write_data(p_drv->dev, 0);
     p_drv->write_data(p_drv->dev, 0);
@@ -25,26 +25,6 @@ int LCD_Param_Setting(driver_info_t *p_drv)
     p_drv->write_data(p_drv->dev, 0);
     p_drv->write_data(p_drv->dev, ((p_drv->lcd_param->height - 1) >> 8));
     p_drv->write_data(p_drv->dev, ((p_drv->lcd_param->height - 1) & 0xff));
-
-#else
-    p_drv->write_cmd(p_drv->dev, (p_drv->lcd_param->setxcmd));
-    p_drv->write_data(p_drv->dev, 0);
-    p_drv->write_cmd(p_drv->dev, (p_drv->lcd_param->setxcmd + 1));
-    p_drv->write_data(p_drv->dev, 0);
-    p_drv->write_cmd(p_drv->dev, (p_drv->lcd_param->setxcmd + 2));
-    p_drv->write_data(p_drv->dev, ((p_drv->lcd_param->width - 1) >> 8));
-    p_drv->write_cmd(p_drv->dev, (p_drv->lcd_param->setxcmd + 3));
-    p_drv->write_data(p_drv->dev, ((p_drv->lcd_param->width - 1) & 0xff));
-
-    p_drv->write_cmd(p_drv->dev, (p_drv->lcd_param->setycmd));
-    p_drv->write_data(p_drv->dev, 0);
-    p_drv->write_cmd(p_drv->dev, (p_drv->lcd_param->setycmd + 1));
-    p_drv->write_data(p_drv->dev, 0);
-    p_drv->write_cmd(p_drv->dev, (p_drv->lcd_param->setycmd + 2));
-    p_drv->write_data(p_drv->dev, ((p_drv->lcd_param->width - 1) >> 8));
-    p_drv->write_cmd(p_drv->dev, (p_drv->lcd_param->setycmd + 3));
-    p_drv->write_data(p_drv->dev, ((p_drv->lcd_param->width - 1) & 0xff));
-#endif
 
     return 0;
 }
@@ -121,8 +101,17 @@ int LCD_WriteRAM(driver_info_t *p_drv, uint16_t color)
 {
     IS_NULL(p_drv);
 
-    p_drv->write_data(p_drv->dev, (color >> 8));
-    p_drv->write_data(p_drv->dev, (color & 0xff));
+    lcd_dev_t *lcd_param = p_drv->lcd_param;
+
+    if (lcd_param->id == 0x5510)
+    {
+        p_drv->write_data(p_drv->dev, color);
+    }
+    else
+    {
+        p_drv->write_data(p_drv->dev, (color >> 8));
+        p_drv->write_data(p_drv->dev, (color & 0xff));
+    }
 
     return 0;
 }
