@@ -11,7 +11,7 @@ int gpio_config(gpio_object_t *p_gpio_object)
 
     int err_code = 0;
 
-    if (p_gpio_object->flag == MODE_OUTPUT_INPUT)
+    if (p_gpio_object->flag == MODE_IO)
     {
         if(p_gpio_object->gpio_dir == GPIO_DIR_OUTPUR)
         {

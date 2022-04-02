@@ -14,6 +14,8 @@ uint16_t fsmc_conig(uint32_t sdram_no, buswidth_e buswidth)
         return -1;
     }
 
+    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_FSMC,ENABLE);
+
 	FSMC_NORSRAMInitTypeDef  FSMC_NORSRAMInitStructure;
     FSMC_NORSRAMTimingInitTypeDef  readWriteTiming; 
 	FSMC_NORSRAMTimingInitTypeDef  writeTiming;

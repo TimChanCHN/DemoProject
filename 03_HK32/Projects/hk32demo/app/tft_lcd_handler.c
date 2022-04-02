@@ -4,6 +4,9 @@
 
 #define LCD_WIDTH   320
 #define LCD_HEIGHT  240
+#define CMD_WRAM    0x2C
+#define CMD_SETX    0x2A
+#define CMD_SETY    0x2B
 
 static lcd_drv_t    m_st7789_obj = 
 {

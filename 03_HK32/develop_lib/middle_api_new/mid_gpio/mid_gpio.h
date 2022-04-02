@@ -15,6 +15,12 @@ typedef enum
     GPIO_DIR_INPUT,
 } gpio_dir_e;
 
+typedef enum
+{
+    MODE_IO  =   0,
+    MODE_AF  =   1,
+}gpio_mode_e;
+
 typedef struct
 {
 #if (defined F0) || (defined F1)

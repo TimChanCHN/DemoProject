@@ -1,5 +1,6 @@
 #include "board_config.h"
 #include "nt_shell_handler.h"
+#include "tft_lcd_4_3_handler.h"
 //#include "lcd_handler.h"
 
 static gpio_object_t m_gpio_led = 
@@ -7,14 +8,6 @@ static gpio_object_t m_gpio_led =
 	.gpio_port_periph_clk 	= RCC_APB2Periph_GPIOB,
 	.p_gpio_port			= GPIOB,
 	.gpio_pin				= GPIO_Pin_0,
-	.gpio_dir				= GPIO_DIR_OUTPUR,
-};
-
-static gpio_object_t m_backlight = 
-{
-	.gpio_port_periph_clk 	= RCC_APB2Periph_GPIOD,
-	.p_gpio_port			= GPIOD,
-	.gpio_pin				= GPIO_Pin_12,
 	.gpio_dir				= GPIO_DIR_OUTPUR,
 };
 
@@ -26,10 +19,12 @@ int main(void)
 	mid_system_tick_init();
 	gpio_config(&m_gpio_led);
 
+	tftlcd_4_3_init();
+	test_UI();
 	// gpio_config(&m_backlight);
 	// gpio_output_set(&m_backlight, 1);
 
-//	LCD_Init();
+	//	LCD_Init();
 	// init_ntshell();
 
 	while(1)

@@ -7,8 +7,6 @@
 
 #include "stdbool.h"
 
-#define MODE_OUTPUT_INPUT   0
-#define MODE_AF             1
 
 void conf_gpio_output(uint32_t ahbperiph, GPIO_TypeDef *gpio_port, uint32_t gpio_pin);
 
