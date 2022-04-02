@@ -81,8 +81,26 @@ void test_UI(void)
         .size       = 24,  
         .width      = m_lcd_obj.width, 
         .height     = 24,
-        .coord      = {100, 100},
+        .coord      = {10, 10},
+    };
+
+    rect_info_t tmp_rect = 
+    {
+        .width   = 5,
+        .coord_s = {210, 210},
+        .coord_e = {320, 320},
+        .color   = GREEN,
+    };
+
+    line_info_t tmp_line = 
+    {
+        .width   = 5,
+        .coord_s = {100, 100},
+        .coord_e = {200, 200},
+        .color   = RED,
     };
     
     LCD_ShowString(&m_tftlcd_4_3_display_obj, string_info);
+    LCD_DrawRectangle(&m_tftlcd_4_3_display_obj, tmp_rect);
+    LCD_DrawLine(&m_tftlcd_4_3_display_obj, tmp_line);
 }
