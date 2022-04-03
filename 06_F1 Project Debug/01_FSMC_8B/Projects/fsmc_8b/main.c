@@ -19,8 +19,8 @@ int main(void)
 	mid_system_tick_init();
 	gpio_config(&m_gpio_led);
 
-	tftlcd_4_3_init();
-	test_UI();
+	// tftlcd_4_3_init();
+	// test_UI();
 	// gpio_config(&m_backlight);
 	// gpio_output_set(&m_backlight, 1);
 

@@ -417,11 +417,6 @@
               <FileType>1</FileType>
               <FilePath>..\app\nt_shell_handler.c</FilePath>
             </File>
-            <File>
-              <FileName>tft_lcd_4_3_handler.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\app\tft_lcd_4_3_handler.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -548,9 +543,9 @@
           <GroupName>hardware</GroupName>
           <Files>
             <File>
-              <FileName>nt35510.c</FileName>
+              <FileName>st7789.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\develop_lib\hardware\nt35510\nt35510.c</FilePath>
+              <FilePath>..\..\..\develop_lib\hardware\st7789\st7789.c</FilePath>
             </File>
           </Files>
         </Group>

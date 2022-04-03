@@ -9,8 +9,12 @@
 // #include "ft32f0xx.h"
 
 // 外设位宽设置
-// #define CONFIG_FSMC_BUSWIDTH_8B
-#define CONFIG_FSMC_BUSWIDTH_16B
+#define CONFIG_FSMC_BUSWIDTH_8B
+// #define CONFIG_FSMC_BUSWIDTH_16B
+
+// LCD控制方式
+// #define CONFIG_CTRL_GPIO
+#define CONFIG_CTRL_FSMC
 
 
 // FSMC相关设置

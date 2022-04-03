@@ -3,6 +3,7 @@
 int st7789_send_byte(lcd_drv_t *p_dev, uint8_t data)
 {
     IS_NULL(p_dev);
+	#if defined (CONFIG_CTRL_GPIO)
     #ifndef LCD_DEBUG
     p_dev->ctrl_gpio.db_port->BSRR = (data & 0xFF);
     p_dev->ctrl_gpio.db_port->BRR  = (~(data) & 0xFF);
@@ -23,6 +24,7 @@ int st7789_send_byte(lcd_drv_t *p_dev, uint8_t data)
     GPIOC->BSRR  |= ((tmp1) << 6);
     GPIOC->BRR   |= ((tmp2) << 6);
     #endif
+	#endif
 	
 	return 0;
 }
@@ -31,12 +33,17 @@ int st7789_write_cmd(lcd_drv_t *p_dev, uint16_t cmd)
 {
     IS_NULL(p_dev);
 
+    #if defined (CONFIG_CTRL_GPIO)
     gpio_output_set(&p_dev->ctrl_gpio.cs_pin, 0);
     gpio_output_set(&p_dev->ctrl_gpio.rs_pin, 0);             // rs = 0, send cmd
     gpio_output_set(&p_dev->ctrl_gpio.wr_pin, 0);
     st7789_send_byte(p_dev, (uint8_t)cmd);
     gpio_output_set(&p_dev->ctrl_gpio.wr_pin, 1);
     gpio_output_set(&p_dev->ctrl_gpio.cs_pin, 1);
+
+    #elif defined (CONFIG_CTRL_FSMC)
+    p_dev->lcd_addr->lcd_cmd = (uint8_t)cmd;
+    #endif
 	
 	return 0;
 }
@@ -45,6 +52,7 @@ int st7789_write_data(lcd_drv_t *p_dev, uint16_t data)
 {
     IS_NULL(p_dev);
 
+    #if defined (CONFIG_CTRL_GPIO)
     gpio_output_set(&p_dev->ctrl_gpio.cs_pin, 0);
     gpio_output_set(&p_dev->ctrl_gpio.rs_pin, 1);             // rs = 1, send data
     gpio_output_set(&p_dev->ctrl_gpio.wr_pin, 0);
@@ -52,6 +60,10 @@ int st7789_write_data(lcd_drv_t *p_dev, uint16_t data)
     gpio_output_set(&p_dev->ctrl_gpio.wr_pin, 1);
     gpio_output_set(&p_dev->ctrl_gpio.cs_pin, 1);
 	
+    #elif defined (CONFIG_CTRL_FSMC)
+    p_dev->lcd_addr->lcd_data = (uint8_t)data;
+    #endif
+
 	return 0;
 }
 
@@ -59,6 +71,7 @@ int st7789_write_burst_data(lcd_drv_t *p_dev, uint8_t *buff, uint16_t count)
 {
     IS_NULL(p_dev);
 
+	#if defined (CONFIG_CTRL_GPIO)
     gpio_output_set(&p_dev->ctrl_gpio.cs_pin, 0);
     gpio_output_set(&p_dev->ctrl_gpio.rs_pin, 1);             // rs = 1, send data
 
@@ -70,15 +83,20 @@ int st7789_write_burst_data(lcd_drv_t *p_dev, uint8_t *buff, uint16_t count)
     }
     gpio_output_set(&p_dev->ctrl_gpio.wr_pin, 1);
     gpio_output_set(&p_dev->ctrl_gpio.cs_pin, 1);
+	#endif
 	
 	return 0;
 }
 
 int st7789_init(driver_info_t *p_drv)
 {
+    // 1. 初始化管脚
+    // 1.1 GPIO控制方式
+
     IS_NULL(p_drv);
     lcd_drv_t *p_dev = p_drv->dev;
-
+	
+    #if defined (CONFIG_CTRL_GPIO)
     #ifdef  LCD_DEBUG
     gpio_config(&p_dev->ctrl_gpio.gpio_port1);
     gpio_config(&p_dev->ctrl_gpio.gpio_port2);
@@ -106,6 +124,20 @@ int st7789_init(driver_info_t *p_drv)
     gpio_output_set(&p_dev->ctrl_gpio.wr_pin, 1);
     gpio_output_set(&p_dev->ctrl_gpio.rd_pin, 1);
 
+    #elif defined (CONFIG_CTRL_FSMC)
+    // 1.2 FSMC控制方式
+    gpio_config(&p_dev->ctrl_fsmc.rst_pin);
+    gpio_config(&p_dev->ctrl_fsmc.back_light);
+    gpio_config(&p_dev->ctrl_fsmc.fsmc_pin1);
+    gpio_config(&p_dev->ctrl_fsmc.fsmc_pin2);
+
+    fsmc_conig(0, BUS_WIDTH_16b);
+
+    p_dev->lcd_base_addr = ((uint32_t)((FSMC_BASE_ADDR + BANK1_SECTOR1_OFFSET) | BANK_8B_A16_OFFSET));
+    p_dev->lcd_addr = ((LCD_Type_8b_t *)(p_dev->lcd_base_addr));
+    #endif
+
+    // 
 
     st7789_write_cmd(p_dev, 0x36);      // 显示扫描方向
     st7789_write_data(p_dev, 0xA0);     // 00:从左到右，从上到下

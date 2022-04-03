@@ -103,15 +103,12 @@ int LCD_WriteRAM(driver_info_t *p_drv, uint16_t color)
 
     lcd_dev_t *lcd_param = p_drv->lcd_param;
 
-    if (lcd_param->id == 0x5510)
-    {
+    #if defined CONFIG_CTRL_FSMC
         p_drv->write_data(p_drv->dev, color);
-    }
-    else
-    {
+    #elif defined CONFIG_CTRL_GPIO
         p_drv->write_data(p_drv->dev, (color >> 8));
         p_drv->write_data(p_drv->dev, (color & 0xff));
-    }
+    #endif
 
     return 0;
 }
@@ -354,7 +351,7 @@ int LCD_Clear(driver_info_t *p_drv)
     LCD_SetCursor(p_drv, 0x00, 0x00);
     LCD_WriteRAM_Prepare(p_drv);
 
-    #if 1
+    #if defined (CONFIG_CTRL_GPIO)
     for (uint16_t y = 0; y < lcddev->height; y++)
     {
         for (uint16_t x = 0; x < lcddev->width*2; x += 2)
@@ -364,7 +361,7 @@ int LCD_Clear(driver_info_t *p_drv)
         }
         p_drv->write_burst_data(p_drv->dev, buf, lcddev->width * 2);
     }
-    #else
+    #elif defined (CONFIG_CTRL_FSMC)
     uint32_t i = 0;
     uint32_t total_point = lcddev->width;
     total_point *= lcddev->height;
