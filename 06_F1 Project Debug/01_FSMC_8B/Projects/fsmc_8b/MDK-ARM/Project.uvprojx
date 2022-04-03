@@ -417,6 +417,11 @@
               <FileType>1</FileType>
               <FilePath>..\app\nt_shell_handler.c</FilePath>
             </File>
+            <File>
+              <FileName>fsmc_8b.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\fsmc_8b.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

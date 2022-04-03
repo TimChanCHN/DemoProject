@@ -180,6 +180,7 @@
     D5 -- PE8
     D6 -- PE9
     D7 -- PE10
+
     D8 -- PE11
     D9 -- PE12
     D10 -- PE13
@@ -190,18 +191,20 @@
     D15 -- PD10
 
     RD/NOE -- PD4
-    WD/NEW -- PD5
+    WD/NWE -- PD5
     RS/A16 -- PD11
     CS/NE1 -- PD7
 
     BL -- PD12
     RST -- PE1
  */
-#define NT35510_PORTD_AF_PIN    (GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_14|GPIO_Pin_15)
+// #define NT35510_PORTD_AF_PIN    (GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_14|GPIO_Pin_15)
+#define NT35510_PORTD_AF_PIN    (GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_7|GPIO_Pin_11|GPIO_Pin_14|GPIO_Pin_15)
 #define NT35510_PORTD           GPIOD
 #define NT35510_PORTD_CLK       RCC_APB2Periph_GPIOD
 
-#define NT35510_PORTE_AF_PIN    (GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15)
+// #define NT35510_PORTE_AF_PIN    (GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15)
+#define NT35510_PORTE_AF_PIN    (GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10)
 #define NT35510_PORTE           GPIOE
 #define NT35510_PORTE_CLK       RCC_APB2Periph_GPIOE
 

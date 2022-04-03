@@ -125,18 +125,26 @@ int st7789_init(driver_info_t *p_drv)
     gpio_output_set(&p_dev->ctrl_gpio.rd_pin, 1);
 
     #elif defined (CONFIG_CTRL_FSMC)
+
     // 1.2 FSMC控制方式
     gpio_config(&p_dev->ctrl_fsmc.rst_pin);
     gpio_config(&p_dev->ctrl_fsmc.back_light);
     gpio_config(&p_dev->ctrl_fsmc.fsmc_pin1);
     gpio_config(&p_dev->ctrl_fsmc.fsmc_pin2);
 
-    fsmc_conig(0, BUS_WIDTH_16b);
+    fsmc_conig(0, BUS_WIDTH_8b);
 
     p_dev->lcd_base_addr = ((uint32_t)((FSMC_BASE_ADDR + BANK1_SECTOR1_OFFSET) | BANK_8B_A16_OFFSET));
     p_dev->lcd_addr = ((LCD_Type_8b_t *)(p_dev->lcd_base_addr));
+	
+	gpio_output_set(&p_dev->ctrl_fsmc.rst_pin, 0);
+    delay_ms(1000);
+    gpio_output_set(&p_dev->ctrl_fsmc.rst_pin, 1);
+
     #endif
 
+
+    
     // 
 
     st7789_write_cmd(p_dev, 0x36);      // 显示扫描方向
