@@ -134,12 +134,13 @@ int st7789_init(driver_info_t *p_drv)
 
     fsmc_conig(0, BUS_WIDTH_8b);
 
-    p_dev->lcd_base_addr = ((uint32_t)((FSMC_BASE_ADDR + BANK1_SECTOR1_OFFSET) | BANK_8B_A16_OFFSET));
-    p_dev->lcd_addr = ((LCD_Type_8b_t *)(p_dev->lcd_base_addr));
-	
 	gpio_output_set(&p_dev->ctrl_fsmc.rst_pin, 0);
     delay_ms(1000);
     gpio_output_set(&p_dev->ctrl_fsmc.rst_pin, 1);
+
+    p_dev->lcd_base_addr = ((uint32_t)((FSMC_BASE_ADDR + BANK1_SECTOR1_OFFSET) | BANK_8B_A16_OFFSET));
+    p_dev->lcd_addr = ((LCD_Type_8b_t *)(p_dev->lcd_base_addr));
+	
 
     #endif
 

@@ -69,6 +69,9 @@ static int func_callback(const char *text, void *extobj)
         usart_put_string(&m_usart_obj, "User input text:'");
         usart_put_string(&m_usart_obj, text);
         usart_put_string(&m_usart_obj, "'\r\n");
+        usart_put_string(&m_usart_obj, "Param num : ");
+        usart_put_char(&m_usart_obj, ntshell->vtrecv.num_params+'0');
+        usart_put_string(&m_usart_obj, "\r\n");
     }
     return 0;
 }
@@ -76,7 +79,7 @@ static int func_callback(const char *text, void *extobj)
 int init_ntshell(void)
 {
     usart_init(&m_usart_obj);
-    // usart_put_string(&m_usart_obj, "Hello world.\r\n");
+    
     ntshell_init(
         &ntshell,
         func_read,

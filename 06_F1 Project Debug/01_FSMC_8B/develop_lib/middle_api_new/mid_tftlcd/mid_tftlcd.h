@@ -6,7 +6,6 @@
 #include <stdio.h>
 
 #include "mid_gpio.h"
-// #include "ft32f0xx.h"
 
 // 外设位宽设置
 #define CONFIG_FSMC_BUSWIDTH_8B
