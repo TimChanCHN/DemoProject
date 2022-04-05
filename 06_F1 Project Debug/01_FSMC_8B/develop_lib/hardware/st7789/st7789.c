@@ -31,6 +31,7 @@ int st7789_send_byte(lcd_drv_t *p_dev, uint8_t data)
 
 int st7789_write_cmd(lcd_drv_t *p_dev, uint16_t cmd)
 {
+    #if 0
     IS_NULL(p_dev);
 
     #if defined (CONFIG_CTRL_GPIO)
@@ -44,12 +45,16 @@ int st7789_write_cmd(lcd_drv_t *p_dev, uint16_t cmd)
     #elif defined (CONFIG_CTRL_FSMC)
     p_dev->lcd_addr->lcd_cmd = (uint8_t)cmd;
     #endif
+    #else
+    LCD->lcd_cmd = (uint8_t)cmd;
+    #endif
 	
 	return 0;
 }
 
 int st7789_write_data(lcd_drv_t *p_dev, uint16_t data)
 {
+    #if 0
     IS_NULL(p_dev);
 
     #if defined (CONFIG_CTRL_GPIO)
@@ -62,6 +67,9 @@ int st7789_write_data(lcd_drv_t *p_dev, uint16_t data)
 	
     #elif defined (CONFIG_CTRL_FSMC)
     p_dev->lcd_addr->lcd_data = (uint8_t)data;
+    #endif
+    #else 
+    LCD->lcd_data = (uint8_t)data;
     #endif
 
 	return 0;
@@ -95,7 +103,8 @@ int st7789_init(driver_info_t *p_drv)
 
     IS_NULL(p_drv);
     lcd_drv_t *p_dev = p_drv->dev;
-	
+
+#if 0
     #if defined (CONFIG_CTRL_GPIO)
     #ifdef  LCD_DEBUG
     gpio_config(&p_dev->ctrl_gpio.gpio_port1);
@@ -143,7 +152,110 @@ int st7789_init(driver_info_t *p_drv)
 	
 
     #endif
+#else
+// 管脚分配:
+/*
+    D0 -- PD14
+    D1 -- PD15
+    D2 -- PD0
+    D3 -- PD1
+    D4 -- PE7
+    D5 -- PE8
+    D6 -- PE9
+    D7 -- PE10
 
+    D8 -- PE11
+    D9 -- PE12
+    D10 -- PE13
+    D11 -- PE14
+    D12 -- PE15
+    D13 -- PD8
+    D14 -- PD9
+    D15 -- PD10
+
+    RD/NOE -- PD4
+    WD/NEW -- PD5
+    RS/A16 -- PD11
+    CS/NE1 -- PD7
+
+    BL -- PB12
+    RST -- PB6
+ */
+    GPIO_InitTypeDef GPIO_InitStructure;
+	FSMC_NORSRAMInitTypeDef  FSMC_NORSRAMInitStructure;
+    FSMC_NORSRAMTimingInitTypeDef  readWriteTiming; 
+	FSMC_NORSRAMTimingInitTypeDef  writeTiming;
+	
+    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_FSMC,ENABLE);	//使能FSMC时钟
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD|RCC_APB2Periph_GPIOE,ENABLE);//使能PORTB,D,E,G以及AFIO复用功能时钟
+
+ 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;				 //PE1 RST
+ 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 		 //推挽输出
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOE, &GPIO_InitStructure);
+
+ 	//PORTD复用推挽输出  
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_7|GPIO_Pin_11|GPIO_Pin_14|GPIO_Pin_15;				 //	//PORTD复用推挽输出  
+ 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; 		 //复用推挽输出   
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOD, &GPIO_InitStructure); 
+    
+	//PORTE复用推挽输出  
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10;				 //	//PORTE复用推挽输出  
+ 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; 		 //复用推挽输出   
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOE, &GPIO_InitStructure);    	    	 											 
+
+    // HCLK = 72Mhz, 14ns
+	readWriteTiming.FSMC_AddressSetupTime = 0x07;	 //地址建立时间（ADDSET）
+    readWriteTiming.FSMC_AddressHoldTime = 0x00;	 //地址保持时间（ADDHLD）模式A未用到	
+    readWriteTiming.FSMC_DataSetupTime = 26;		 // 数据保存时间为16个HCLK,因为液晶驱动IC的读数据的时候，速度不能太快，尤其对1289这个IC。
+    readWriteTiming.FSMC_BusTurnAroundDuration = 0x00;
+    readWriteTiming.FSMC_CLKDivision = 0x00;
+    readWriteTiming.FSMC_DataLatency = 0x00;
+    readWriteTiming.FSMC_AccessMode = FSMC_AccessMode_A;	 //模式A 
+    
+
+	writeTiming.FSMC_AddressSetupTime = 0x04;	 //地址建立时间（ADDSET）为1个HCLK  
+    writeTiming.FSMC_AddressHoldTime = 0x00;	 //地址保持时间（A		
+    writeTiming.FSMC_DataSetupTime = 8;		 ////数据保存时间为4个HCLK	
+    writeTiming.FSMC_BusTurnAroundDuration = 0x00;
+    writeTiming.FSMC_CLKDivision = 0x00;
+    writeTiming.FSMC_DataLatency = 0x00;
+    writeTiming.FSMC_AccessMode = FSMC_AccessMode_A;	 //模式A 
+
+    // BTCR为寄存器BCRx,BTRx, x=(NE1~NE4)
+    FSMC_NORSRAMInitStructure.FSMC_Bank = FSMC_Bank1_NORSRAM1;//  这里我们使用NE1 ，也就对应BTCR[0],[1]。
+    // BCRx[1] --> MUXEN地址/数据复用使能位
+    FSMC_NORSRAMInitStructure.FSMC_DataAddressMux = FSMC_DataAddressMux_Disable; // 不复用数据地址
+    // BCRx[3:2] --> MTYP存储器类型
+    FSMC_NORSRAMInitStructure.FSMC_MemoryType =FSMC_MemoryType_SRAM;// FSMC_MemoryType_SRAM;  //SRAM   
+    // BCRx[5:4] --> MWID：存储器数据总线宽度
+    FSMC_NORSRAMInitStructure.FSMC_MemoryDataWidth = FSMC_MemoryDataWidth_8b;//存储器数据宽度为16bit   
+    FSMC_NORSRAMInitStructure.FSMC_BurstAccessMode =FSMC_BurstAccessMode_Disable;// FSMC_BurstAccessMode_Disable; 
+    FSMC_NORSRAMInitStructure.FSMC_WaitSignalPolarity = FSMC_WaitSignalPolarity_Low;
+    FSMC_NORSRAMInitStructure.FSMC_AsynchronousWait=FSMC_AsynchronousWait_Disable; 
+    FSMC_NORSRAMInitStructure.FSMC_WrapMode = FSMC_WrapMode_Disable;   
+    FSMC_NORSRAMInitStructure.FSMC_WaitSignalActive = FSMC_WaitSignalActive_BeforeWaitState;  
+    FSMC_NORSRAMInitStructure.FSMC_WriteOperation = FSMC_WriteOperation_Enable;	//  存储器写使能
+    FSMC_NORSRAMInitStructure.FSMC_WaitSignal = FSMC_WaitSignal_Disable;   
+    FSMC_NORSRAMInitStructure.FSMC_ExtendedMode = FSMC_ExtendedMode_Enable; // 读写使用不同的时序
+    FSMC_NORSRAMInitStructure.FSMC_WriteBurst = FSMC_WriteBurst_Disable; 
+    FSMC_NORSRAMInitStructure.FSMC_ReadWriteTimingStruct = &readWriteTiming; //读写时序
+    FSMC_NORSRAMInitStructure.FSMC_WriteTimingStruct = &writeTiming;  //写时序
+
+    FSMC_NORSRAMInit(&FSMC_NORSRAMInitStructure);  //初始化FSMC配置
+
+ 	FSMC_NORSRAMCmd(FSMC_Bank1_NORSRAM1, ENABLE);  // 使能BANK1 
+
+	delay_ms(50);           // delay 50 ms 
+    //复位
+    set_gpio_value(GPIOE, GPIO_Pin_1, 0);
+    delay_ms(1000);
+    set_gpio_value(GPIOE, GPIO_Pin_1, 1);
+
+
+#endif
 
     
     // 

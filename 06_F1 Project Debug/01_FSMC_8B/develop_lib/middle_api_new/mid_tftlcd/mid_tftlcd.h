@@ -124,6 +124,10 @@ typedef struct
 	uint16_t lcd_data;
 } LCD_Type_16b_t;
 
+#define LCD_BASE        ((uint32_t)(0x60000000 | 0x00FFFF))
+#define LCD             ((LCD_Type_8b_t *) LCD_BASE)
+
+
 // gpio驱动方式
 typedef struct
 {

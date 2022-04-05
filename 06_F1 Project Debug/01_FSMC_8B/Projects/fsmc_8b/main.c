@@ -1,8 +1,8 @@
 #include "board_config.h"
 #include "nt_shell_handler.h"
 //#include "tft_lcd_4_3_handler.h"
-//#include "lcd_handler.h"
-#include "fsmc_8b.h"
+#include "lcd_handler.h"
+// #include "fsmc_8b.h"
 
 static gpio_object_t m_gpio_led = 
 {
@@ -20,13 +20,13 @@ int main(void)
 	mid_system_tick_init();
 	gpio_config(&m_gpio_led);
 
-	fsmc_8b_init();
+	// fsmc_8b_init();
 	// tftlcd_4_3_init();
 	// test_UI();
 	// gpio_config(&m_backlight);
 	// gpio_output_set(&m_backlight, 1);
 
-	//	LCD_Init();
+		LCD_Init();
 	// init_ntshell();
 
 	while(1)
