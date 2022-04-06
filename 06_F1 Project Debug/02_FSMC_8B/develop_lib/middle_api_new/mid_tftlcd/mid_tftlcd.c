@@ -368,11 +368,15 @@ int LCD_Clear(driver_info_t *p_drv)
 
     for (i = 0; i < total_point; i++)
     {
+        #if 0
         #ifdef CONFIG_FSMC_BUSWIDTH_8B
         p_drv->dev->lcd_addr->lcd_data = (uint8_t)(p_drv->background_color >> 8);
         p_drv->dev->lcd_addr->lcd_data = (uint8_t)(p_drv->background_color & 0xff);
         #elif defined CONFIG_FSMC_BUSWIDTH_16B
         p_drv->dev->lcd_addr->lcd_data = p_drv->background_color;
+        #endif
+        #else
+        LCD_WriteRAM(p_drv, p_drv->background_color);
         #endif
     }
     #endif

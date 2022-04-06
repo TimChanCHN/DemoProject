@@ -231,12 +231,12 @@ void LCD_Init(void)
 
 
 
-    LCD_WR_REG(0X04);				   
-    lcddev.id=LCD_RD_DATA();	//dummy read 	
-    lcddev.id=LCD_RD_DATA();	//读到0X00
-    lcddev.id=LCD_RD_DATA();   	//读取93								   
-    lcddev.id<<=8;
-    lcddev.id|=LCD_RD_DATA();  	//读取41 
+    // LCD_WR_REG(0X04);				   
+    // lcddev.id=LCD_RD_DATA();	//dummy read 	
+    // lcddev.id=LCD_RD_DATA();	//读到0X00
+    // lcddev.id=LCD_RD_DATA();   	//读取93								   
+    // lcddev.id<<=8;
+    // lcddev.id|=LCD_RD_DATA();  	//读取41 
 
 
     LCD_WR_REG(0x36);      // 显示扫描方向

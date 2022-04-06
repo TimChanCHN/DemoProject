@@ -59,7 +59,7 @@ static driver_info_t m_fsmc_8b_display_obj =
     // .read_data          =   nt35510_read_data,
     // .read_reg           =   nt35510_read_reg,
     .point_color        =   YELLOW,
-    .background_color   =   RED,
+    .background_color   =   YELLOW,
 };
 
 

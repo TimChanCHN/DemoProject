@@ -31,7 +31,7 @@ int st7789_send_byte(lcd_drv_t *p_dev, uint8_t data)
 
 int st7789_write_cmd(lcd_drv_t *p_dev, uint16_t cmd)
 {
-    #if 0
+    #if 1
     IS_NULL(p_dev);
 
     #if defined (CONFIG_CTRL_GPIO)
@@ -54,7 +54,7 @@ int st7789_write_cmd(lcd_drv_t *p_dev, uint16_t cmd)
 
 int st7789_write_data(lcd_drv_t *p_dev, uint16_t data)
 {
-    #if 0
+    #if 1
     IS_NULL(p_dev);
 
     #if defined (CONFIG_CTRL_GPIO)
@@ -74,6 +74,14 @@ int st7789_write_data(lcd_drv_t *p_dev, uint16_t data)
 
 	return 0;
 }
+
+uint8_t st7789_read_data(lcd_drv_t *p_dev)
+{
+    uint8_t data;
+    data = p_dev->lcd_addr->lcd_data;
+    return data;
+}
+
 
 int st7789_write_burst_data(lcd_drv_t *p_dev, uint8_t *buff, uint16_t count)
 {
@@ -257,8 +265,13 @@ int st7789_init(driver_info_t *p_drv)
 
 #endif
 
+    st7789_write_cmd(p_dev, 0X04);				   
+    p_drv->lcd_param->id =st7789_read_data(p_dev);	//dummy read 	
+    p_drv->lcd_param->id =st7789_read_data(p_dev);	//读到0X00
+    p_drv->lcd_param->id =st7789_read_data(p_dev);   	//读取93								   
+    p_drv->lcd_param->id <<=8;
+    p_drv->lcd_param->id |=st7789_read_data(p_dev);  	//读取41 
     
-    // 
 
     st7789_write_cmd(p_dev, 0x36);      // 显示扫描方向
     st7789_write_data(p_dev, 0xA0);     // 00:从左到右，从上到下
