@@ -154,7 +154,7 @@
           <Type>0</Type>
           <LineNumber>29</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134222066</Address>
+          <Address>134220646</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -164,6 +164,22 @@
           <Filename>E:\宸ヤ綔\00_涓汉椤圭洰\01_瑙勫垝椤圭洰\00_Git\DemoProject\06_F1 Project Debug\01_FSMC_8B\Projects\fsmc_8b\main.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\FT32F0XX\../main.c\29</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>231</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134219172</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>E:\宸ヤ綔\00_涓汉椤圭洰\01_瑙勫垝椤圭洰\00_Git\DemoProject\06_F1 Project Debug\01_FSMC_8B\Projects\fsmc_8b\app\lcd_handler.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\FT32F0XX\../app/lcd_handler.c\231</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -186,6 +202,11 @@
           <count>3</count>
           <WinNumber>1</WinNumber>
           <ItemText>((LCD_TypeDef *) ((uint32_t)(0x60000000 | 0x00001FFFF)))</ItemText>
+        </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>lcddev</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
@@ -216,7 +237,7 @@
         <AscS3>0</AscS3>
         <aSer3>0</aSer3>
         <eProf>0</eProf>
-        <aLa>1</aLa>
+        <aLa>0</aLa>
         <aPa1>0</aPa1>
         <AscS4>0</AscS4>
         <aSer4>0</aSer4>

@@ -19,7 +19,7 @@ void LCD_WR_REG(uint8_t regval)
 //data:要写入的值
 void LCD_WR_DATA(uint8_t data)
 {	 
-	LCD->LCD_RAM=data;		 
+	LCD->LCD_RAM=data;		
 }
 //读LCD数据
 //返回值:读到的值
@@ -35,7 +35,7 @@ uint16_t LCD_RD_DATA(void)
 void LCD_WriteReg(uint16_t LCD_Reg,uint16_t LCD_RegValue)
 {	
 	LCD->LCD_REG = (uint8_t)LCD_Reg;		//写入要写的寄存器序号	 
-	LCD->LCD_RAM = (uint8_t)LCD_RegValue;//写入数据	    		 
+	LCD->LCD_RAM = (uint8_t)LCD_RegValue;//写入数据	    	
 }	   
 //读寄存器
 //LCD_Reg:寄存器地址
@@ -49,13 +49,14 @@ uint16_t LCD_ReadReg(uint16_t LCD_Reg)
 //开始写GRAM
 void LCD_WriteRAM_Prepare(void)
 {
-    LCD->LCD_REG=(uint8_t)lcddev.wramcmd;	  
+    LCD->LCD_REG=(uint8_t)lcddev.wramcmd;	
 }	 
 //LCD写GRAM
 //RGB_Code:颜色值
 void LCD_WriteRAM(uint16_t RGB_Code)
 {							    
-	LCD->LCD_RAM = (uint8_t)RGB_Code;//写十六位GRAM
+	LCD->LCD_RAM = (uint8_t)(RGB_Code >> 8);//写十六位GRAM
+	LCD->LCD_RAM = (uint8_t)(RGB_Code & 0xff);//写十六位GRAM
 }
 
 
@@ -75,7 +76,8 @@ void LCD_DrawPoint(uint16_t x,uint16_t y)
 {
 	LCD_SetCursor(x,y);		//设置光标位置 
 	LCD_WriteRAM_Prepare();	//开始写入GRAM
-	LCD->LCD_RAM=(uint8_t)POINT_COLOR; 
+	LCD->LCD_RAM = (uint8_t)(POINT_COLOR >> 8);//写十六位GRAM
+	LCD->LCD_RAM = (uint8_t)(POINT_COLOR & 0xff);//写十六位GRAM
 }
 
 
@@ -88,7 +90,8 @@ void LCD_Display_Dir(uint8_t dir)
 		lcddev.dir=0;	//竖屏
 		lcddev.width=240;
 		lcddev.height=320;
-	}else 				//横屏
+	}
+    else 				//横屏
 	{	  				
 		lcddev.dir=1;	//横屏
 		lcddev.width=320;
@@ -103,6 +106,7 @@ void LCD_Display_Dir(uint8_t dir)
     LCD_WR_DATA(0);
     LCD_WR_DATA((lcddev.width-1)>>8);
     LCD_WR_DATA((lcddev.width-1)&0XFF);
+
     LCD_WR_REG(lcddev.setycmd); 
     LCD_WR_DATA(0);
     LCD_WR_DATA(0);
@@ -178,14 +182,14 @@ void LCD_Init(void)
 
 	readWriteTiming.FSMC_AddressSetupTime = 0x02;	 //地址建立时间（ADDSET）为1个HCLK 1/72M=14ns
     readWriteTiming.FSMC_AddressHoldTime = 0x00;	 //地址保持时间（ADDHLD）模式A未用到	
-    readWriteTiming.FSMC_DataSetupTime = 0x05;		 // 数据保存时间为16个HCLK,因为液晶驱动IC的读数据的时候，速度不能太快，尤其对1289这个IC。
+    readWriteTiming.FSMC_DataSetupTime = 0x0f;		 // 数据保存时间为16个HCLK,因为液晶驱动IC的读数据的时候，速度不能太快，尤其对1289这个IC。
     readWriteTiming.FSMC_BusTurnAroundDuration = 0x00;
     readWriteTiming.FSMC_CLKDivision = 0x00;
     readWriteTiming.FSMC_DataLatency = 0x00;
     readWriteTiming.FSMC_AccessMode = FSMC_AccessMode_A;	 //模式A 
     
 
-	writeTiming.FSMC_AddressSetupTime = 0x01;	 //地址建立时间（ADDSET）为1个HCLK  
+	writeTiming.FSMC_AddressSetupTime = 0x00;	 //地址建立时间（ADDSET）为1个HCLK  
     writeTiming.FSMC_AddressHoldTime = 0x00;	 //地址保持时间（A		
     writeTiming.FSMC_DataSetupTime = 0x03;		 ////数据保存时间为4个HCLK	
     writeTiming.FSMC_BusTurnAroundDuration = 0x00;
@@ -223,7 +227,17 @@ void LCD_Init(void)
     delay_ms(1000);
     set_gpio_value(GPIOE, GPIO_Pin_1, 1);
 
-	delay_ms(50);           // delay 50 ms 
+	delay_ms(500);           // delay 50 ms 
+
+
+
+    LCD_WR_REG(0X04);				   
+    lcddev.id=LCD_RD_DATA();	//dummy read 	
+    lcddev.id=LCD_RD_DATA();	//读到0X00
+    lcddev.id=LCD_RD_DATA();   	//读取93								   
+    lcddev.id<<=8;
+    lcddev.id|=LCD_RD_DATA();  	//读取41 
+
 
     LCD_WR_REG(0x36);      // 显示扫描方向
     LCD_WR_DATA(0xA0);     // 00:从左到右，从上到下
@@ -305,8 +319,6 @@ void LCD_Init(void)
     
 	LCD_Display_Dir(1);		//默认为竖屏
 
-    set_gpio_value(GPIOD, GPIO_Pin_12, 1);       // 亮背光
-
 	LCD_Clear(RED);
 }  
 
@@ -324,7 +336,8 @@ void LCD_Clear(uint16_t color)
 	LCD_WriteRAM_Prepare();     		//开始写入GRAM	 	  
 	for(index=0;index<totalpoint;index++)
 	{
-		LCD->LCD_RAM=(uint8_t)color;	
+        LCD->LCD_RAM = (uint8_t)(color >> 8);//写十六位GRAM
+        LCD->LCD_RAM = (uint8_t)(color & 0xff);//写十六位GRAM
 	}
 }  
 
