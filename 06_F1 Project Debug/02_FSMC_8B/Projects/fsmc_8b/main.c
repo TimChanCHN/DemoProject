@@ -22,7 +22,8 @@ int main(void)
 
 	fsmc_8b_init();
 	// tftlcd_4_3_init();
-	// test_UI();
+	Display_UI1();
+	Display_Dynamic();
 	// gpio_config(&m_backlight);
 	// gpio_output_set(&m_backlight, 1);
 

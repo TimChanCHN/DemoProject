@@ -73,7 +73,7 @@ void tftlcd_4_3_init(void)
 void test_UI(void)
 {
 
-    char str[] = "I love funa Chan";
+    char str[] = "123123";
 
     string_info_t string_info = 
     {

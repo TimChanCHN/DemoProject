@@ -375,6 +375,58 @@ int LCD_Clear(driver_info_t *p_drv)
     return 0;
 }
 
+
+/**
+ * @brief  填充指定区域指定颜色
+ * 
+ * @param[i] p_drv          驱动设备结构体 
+ * @param[i] (sx,sy)        矩形坐标1
+ * @param[i] (ex,ey)        矩形坐标2
+ * @param[i] color          颜色
+ * 
+ * @retval no return
+ */
+int LCD_Fill(driver_info_t *p_drv, fill_area_info_t fill_area)
+{
+    IS_NULL(p_drv);
+
+    if ((fill_area.coord_s.x > p_drv->lcd_param->width) 
+        || (fill_area.coord_s.y > p_drv->lcd_param->height)
+        || (fill_area.coord_e.x > p_drv->lcd_param->width) 
+        || (fill_area.coord_e.y > p_drv->lcd_param->height)
+        || (fill_area.width > p_drv->lcd_param->width))
+    {
+        return -EINVAL;
+    }    
+
+	uint16_t i, j;
+	uint16_t xlen=0;
+    uint8_t buf[320*2];
+
+    for (i = 0; i < (p_drv->lcd_param->width)*2; i += 2)
+    {
+        buf[i] = (fill_area.color >> 8);
+        buf[i+1] = (fill_area.color & 0xff);
+    }
+
+    xlen = fill_area.coord_e.x - fill_area.coord_s.x + 1;	 
+    for (i = fill_area.coord_s.y; i <= fill_area.coord_e.y; i++)
+    {
+        LCD_SetCursor(p_drv, fill_area.coord_s.x, i);      				//设置光标位置 
+        LCD_WriteRAM_Prepare(p_drv);     			                    //开始写入GRAM	
+#if defined (CONFIG_CTRL_GPIO)
+        p_drv->write_burst_data(p_drv->dev, buf, xlen*2); 
+#elif defined (CONFIG_CTRL_FSMC)
+        for (j = 0; j <= xlen; j++)
+        {
+            LCD_WriteRAM(p_drv, fill_area.color);
+        }
+#endif
+    }	 
+
+    return 0;
+} 
+
 /**
  * @brief  画点函数
  * 
@@ -605,51 +657,6 @@ int LCD_ShowNum(driver_info_t *p_drv, number_info_t number)
         chars.num = temp + '0';
         LCD_ShowChar(p_drv, chars); 
 	}
-
-    return 0;
-} 
-
-
-/**
- * @brief  填充指定区域指定颜色
- * 
- * @param[i] p_drv          驱动设备结构体 
- * @param[i] (sx,sy)        矩形坐标1
- * @param[i] (ex,ey)        矩形坐标2
- * @param[i] color          颜色
- * 
- * @retval no return
- */
-int LCD_Fill(driver_info_t *p_drv, fill_area_info_t fill_area)
-{
-    IS_NULL(p_drv);
-
-    if ((fill_area.coord_s.x > p_drv->lcd_param->width) 
-        || (fill_area.coord_s.y > p_drv->lcd_param->height)
-        || (fill_area.coord_e.x > p_drv->lcd_param->width) 
-        || (fill_area.coord_e.y > p_drv->lcd_param->height)
-        || (fill_area.width > p_drv->lcd_param->width))
-    {
-        return -EINVAL;
-    }    
-    
-	uint16_t i;
-	uint16_t xlen=0;
-    uint8_t buf[320*2];
-
-    for (i = 0; i < (p_drv->lcd_param->width)*2; i += 2)
-    {
-        buf[i] = (fill_area.color >> 8);
-        buf[i+1] = (fill_area.color & 0xff);
-    }
-
-    xlen = fill_area.coord_e.x - fill_area.coord_s.x + 1;	 
-    for (i = fill_area.coord_s.y; i <= fill_area.coord_e.y; i++)
-    {
-        LCD_SetCursor(p_drv, fill_area.coord_s.x, i);      				//设置光标位置 
-        LCD_WriteRAM_Prepare(p_drv);     			//开始写入GRAM	
-        p_drv->write_burst_data(p_drv->dev, buf, xlen*2); 
-    }	 
 
     return 0;
 } 
