@@ -156,14 +156,47 @@ int st7789_init(driver_info_t *p_drv)
     gpio_output_set(&p_dev->ctrl_fsmc.rst_pin, 1);
 #endif
 
-    // st7789_write_cmd(p_dev, 0X04);				   
-    // p_drv->lcd_param->id =st7789_read_data(p_dev);	//dummy read 	
-    // p_drv->lcd_param->id =st7789_read_data(p_dev);
-    // p_drv->lcd_param->id =st7789_read_data(p_dev);								   
-    // p_drv->lcd_param->id <<=8; 
-    // p_drv->lcd_param->id |=st7789_read_data(p_dev);
-    
     delay_ms(10);                       // 此延时不能忽略，因为FSMC速度快，芯片复位之后立马发送命令，可能会导致初始化不完全
+
+    // read id
+    st7789_write_cmd(p_dev, 0XDA);				   
+    p_drv->lcd_param->id =st7789_read_data(p_dev);	
+    p_drv->lcd_param->id =st7789_read_data(p_dev);
+    
+    if (p_drv->lcd_param->id == 0x85)
+    {
+        st7789_write_cmd(p_dev, 0XDB);				   
+        p_drv->lcd_param->id =st7789_read_data(p_dev);	
+        p_drv->lcd_param->id =st7789_read_data(p_dev);
+
+        if (p_drv->lcd_param->id == 0x85)
+        {
+            st7789_write_cmd(p_dev, 0XDC);				   
+            p_drv->lcd_param->id =st7789_read_data(p_dev);	
+            p_drv->lcd_param->id =st7789_read_data(p_dev);
+
+            if (p_drv->lcd_param->id == 0x52)
+            {
+                p_drv->lcd_param->id = 0x7789;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+        else
+        {
+            return -1;
+        }
+    }
+    else
+    {
+        return -1;
+    }
+
+
+
+
     st7789_write_cmd(p_dev, 0x36);      // 显示扫描方向
     st7789_write_data(p_dev, 0xA0);     // 00:从左到右，从上到下
                                         // A0:从下到上，从左到右
