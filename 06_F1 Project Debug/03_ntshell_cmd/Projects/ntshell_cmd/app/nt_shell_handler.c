@@ -2,7 +2,6 @@
 #include "mid_usart.h"
 #include "board_config.h"
 
-#define UNUSED_VARIABLE(N)  do { (void)(N); } while (0)
 
 static ntshell_t ntshell;
 
@@ -37,6 +36,11 @@ static usart_object_t m_usart_obj =
     .uart_config = &m_uart_config,
 };
 
+static cmd_table_t m_cmd_table_list[] = 
+{
+    {"led_control", "control LED2", led_control},
+};
+
 
 static int func_read(char *buf, int cnt, void *extobj)
 {
@@ -59,22 +63,6 @@ static int func_write(const char *buf, int cnt, void *extobj)
     return cnt;
 }
 
-static int func_callback(const char *text, void *extobj)
-{
-    ntshell_t *ntshell = (ntshell_t *)extobj;
-    UNUSED_VARIABLE(ntshell);
-    UNUSED_VARIABLE(extobj);
-
-    if (ntlibc_strlen(text) > 0) {
-        usart_put_string(&m_usart_obj, "User input text:'");
-        usart_put_string(&m_usart_obj, text);
-        usart_put_string(&m_usart_obj, "'\r\n");
-        usart_put_string(&m_usart_obj, "Param num : ");
-        usart_put_char(&m_usart_obj, ntshell->vtrecv.num_params+'0');
-        usart_put_string(&m_usart_obj, "\r\n");
-    }
-    return 0;
-}
 
 int init_ntshell(void)
 {
@@ -84,8 +72,14 @@ int init_ntshell(void)
         &ntshell,
         func_read,
         func_write,
-        func_callback,
-        (void *)&ntshell);
+        ntshell_usrcmd_execute,
+        (void *)&m_usart_obj);
+
+    // function register
+    for (int i = 0; i < sizeof(m_cmd_table_list)/sizeof(m_cmd_table_list[0]); i++)
+    {
+        CMD_FUNCTION_REGISTER(m_cmd_table_list[i].cmd, m_cmd_table_list[i].desc, m_cmd_table_list[i].func);
+    }
 
     ntshell_set_prompt(&ntshell, "ntshell>");
     ntshell_execute(&ntshell);

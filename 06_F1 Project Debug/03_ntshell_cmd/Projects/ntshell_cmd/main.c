@@ -13,22 +13,13 @@ static gpio_object_t m_gpio_led =
 };
 
 
-// Black Light-->PD12
-// RST --> PE1
 int main(void)
 {
 	mid_system_tick_init();
 	gpio_config(&m_gpio_led);
+	gpio_output_set(&m_gpio_led, 1);
 
-	fsmc_8b_init();
-	// tftlcd_4_3_init();
-	Display_UI1();
-	Display_Dynamic();
-	// gpio_config(&m_backlight);
-	// gpio_output_set(&m_backlight, 1);
-
-		// LCD_Init();
-	// init_ntshell();
+	init_ntshell();
 
 	while(1)
 	{

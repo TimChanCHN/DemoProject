@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER,USE_DEFAULT_TIMEOUT_CALLBACK,DEBUG,F1, HK32F103</Define>
               <Undefine></Undefine>
-              <IncludePath>..\;..\app;..\..\..\develop_lib;..\..\..\develop_lib\third_lib;..\..\..\develop_lib\third_lib\crc32;..\..\..\develop_lib\third_lib\queue;..\..\..\develop_lib\third_lib\app_timer;..\..\..\develop_lib\third_lib\ntshell\util;..\..\..\develop_lib\third_lib\ntshell\core;..\..\..\develop_lib\third_lib\app_scheduler;..\..\..\develop_lib\hardware;..\..\..\develop_lib\hardware\st7789;..\..\..\develop_lib\hardware\nt35510;..\..\..\develop_lib\hk_lib;..\..\..\develop_lib\hk_lib\HK32F103\CMSIS\CM3\CoreSupport;..\..\..\develop_lib\hk_lib\HK32F103\STM32F10x_StdPeriph_Driver\inc;..\..\..\develop_lib\hk_lib\HK32F103\CMSIS\CM3\DeviceSupport\ST\STM32F10x;..\..\..\develop_lib\middle_api_new;..\..\..\develop_lib\middle_api_new\ir;..\..\..\develop_lib\middle_api_new\adc;..\..\..\develop_lib\middle_api_new\delay;..\..\..\develop_lib\middle_api_new\mid_gpio;..\..\..\develop_lib\middle_api_new\mid_tftlcd;..\..\..\develop_lib\middle_api_new\mid_flash;..\..\..\develop_lib\middle_api_new\mid_usart;..\..\..\develop_lib\middle_api_new\mid_bk953x;..\..\..\develop_lib\middle_api_new\mid_systick;..\..\..\develop_lib\middle_api_new\trace;..\..\..\develop_lib\Fx_api\F1_api;..\..\..\develop_lib\Fx_api\F1_api\gpio;..\..\..\develop_lib\Fx_api\F1_api\systick;..\..\..\develop_lib\Fx_api\F1_api\usart;..\..\..\develop_lib\Fx_api\F1_api\FSMC</IncludePath>
+              <IncludePath>..\;..\app;..\..\..\develop_lib;..\..\..\develop_lib\third_lib;..\..\..\develop_lib\third_lib\crc32;..\..\..\develop_lib\third_lib\queue;..\..\..\develop_lib\third_lib\app_timer;..\..\..\develop_lib\third_lib\ntshell\util;..\..\..\develop_lib\third_lib\ntshell\core;..\..\..\develop_lib\third_lib\app_scheduler;..\..\..\develop_lib\hardware;..\..\..\develop_lib\hardware\st7789;..\..\..\develop_lib\hardware\nt35510;..\..\..\develop_lib\hk_lib;..\..\..\develop_lib\hk_lib\HK32F103\CMSIS\CM3\CoreSupport;..\..\..\develop_lib\hk_lib\HK32F103\STM32F10x_StdPeriph_Driver\inc;..\..\..\develop_lib\hk_lib\HK32F103\CMSIS\CM3\DeviceSupport\ST\STM32F10x;..\..\..\develop_lib\middle_api_new;..\..\..\develop_lib\middle_api_new\ir;..\..\..\develop_lib\middle_api_new\adc;..\..\..\develop_lib\middle_api_new\delay;..\..\..\develop_lib\middle_api_new\mid_gpio;..\..\..\develop_lib\middle_api_new\mid_tftlcd;..\..\..\develop_lib\middle_api_new\mid_flash;..\..\..\develop_lib\middle_api_new\mid_usart;..\..\..\develop_lib\middle_api_new\mid_bk953x;..\..\..\develop_lib\middle_api_new\mid_systick;..\..\..\develop_lib\middle_api_new\trace;..\..\..\develop_lib\Fx_api\F1_api;..\..\..\develop_lib\Fx_api\F1_api\gpio;..\..\..\develop_lib\Fx_api\F1_api\systick;..\..\..\develop_lib\Fx_api\F1_api\usart;..\..\..\develop_lib\Fx_api\F1_api\FSMC;..\..\..\develop_lib\user_command;..\..\..\develop_lib\user_command\nt_shell_cmd\port;..\..\..\develop_lib\user_command\nt_shell_cmd\cmd_list</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -656,6 +656,21 @@
               <FileName>f1_fsmc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\develop_lib\Fx_api\F1_api\FSMC\f1_fsmc.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>cmd_function</GroupName>
+          <Files>
+            <File>
+              <FileName>ntshell_usrcmd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\user_command\nt_shell_cmd\port\ntshell_usrcmd.c</FilePath>
+            </File>
+            <File>
+              <FileName>cmd_list.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\user_command\nt_shell_cmd\cmd_list\cmd_list.c</FilePath>
             </File>
           </Files>
         </Group>
