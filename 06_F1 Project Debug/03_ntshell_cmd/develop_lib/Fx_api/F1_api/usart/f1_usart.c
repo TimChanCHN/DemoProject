@@ -29,6 +29,8 @@ void f1_uart_init(f1_uart_info_t uart_info, f1_uart_config_t const *p_config)
 
     USART_InitTypeDef USART_InitStruct;
 
+    NVIC_InitTypeDef NVIC_InitStructure;
+
     /* Enable GPIO clock */
     RCC_APB2PeriphClockCmd(uart_info.tx_clk | uart_info.rx_clk, ENABLE);
 
@@ -61,8 +63,14 @@ void f1_uart_init(f1_uart_info_t uart_info, f1_uart_config_t const *p_config)
     USART_InitStruct.USART_Mode = p_config->mode;
     USART_InitStruct.USART_HardwareFlowControl = p_config->hwfc;
 
-    USART_Init(uart_info.uart, &USART_InitStruct);
+    NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=3 ;//抢占优先级3
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;		//子优先级3
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
+	NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器
 
+    USART_Init(uart_info.uart, &USART_InitStruct);
+    // USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);//开启串口接受中断
     /* Enable USART */
     USART_Cmd(uart_info.uart, ENABLE);
 }
@@ -94,3 +102,15 @@ uint16_t f1_uart_get(uint8_t uart_id)
     return data;
 }
 
+/**
+ * @brief  串口1中断服务程序
+ * 
+ * @retval [description] 
+ */
+void USART1_IRQHandler(void)                
+{
+    if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
+    {
+        // Res =USART_ReceiveData(USART1);	//读取接收到的数据
+    }
+}
