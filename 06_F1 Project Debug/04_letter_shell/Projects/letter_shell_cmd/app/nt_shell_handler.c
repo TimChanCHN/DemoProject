@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "mid_usart.h"
 #include "board_config.h"
 

@@ -1,12 +1,12 @@
 # ignore_files
 
 .vscode/
-Projects/ntshell_cmd/MDK-ARM/Listings/*
-Projects/ntshell_cmd/MDK-ARM/Objects/*
-Projects/ntshell_cmd/MDK-ARM/DebugConfig/*
-Projects/ntshell_cmd/MDK-ARM/Project.uvguix.*
-Projects/ntshell_cmd/MDK-ARM/EventRecorderStub.*
-Projects/ntshell_cmd/MDK-ARM/JLink*
+Projects/letter_shell_cmd/MDK-ARM/Listings/*
+Projects/letter_shell_cmd/MDK-ARM/Objects/*
+Projects/letter_shell_cmd/MDK-ARM/DebugConfig/*
+Projects/letter_shell_cmd/MDK-ARM/Project.uvguix.*
+Projects/letter_shell_cmd/MDK-ARM/EventRecorderStub.*
+Projects/letter_shell_cmd/MDK-ARM/JLink*
 
 
 *.DS_Store/
