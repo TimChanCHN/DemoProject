@@ -888,7 +888,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\develop_lib\user_command\nt_shell_cmd\port\ntshell_usrcmd.c</PathWithFileName>
+      <PathWithFileName>..\..\..\develop_lib\user_command\nt_shell_cmd\ntshell_usrcmd.c</PathWithFileName>
       <FilenameWithoutPath>ntshell_usrcmd.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -900,7 +900,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\develop_lib\user_command\nt_shell_cmd\cmd_list\cmd_list.c</PathWithFileName>
+      <PathWithFileName>..\..\..\develop_lib\user_command\cmd_list\cmd_list.c</PathWithFileName>
       <FilenameWithoutPath>cmd_list.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
