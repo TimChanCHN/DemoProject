@@ -152,18 +152,34 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>200</LineNumber>
+          <LineNumber>39</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134224866</Address>
+          <Address>134220866</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>E:\宸ヤ綔\00_涓汉椤圭洰\01_瑙勫垝椤圭洰\00_Git\DemoProject\06_F1 Project Debug\02_FSMC_8B\develop_lib\hardware\st7789\st7789.c</Filename>
+          <Filename>E:\宸ヤ綔\00_涓汉椤圭洰\01_瑙勫垝椤圭洰\00_Git\DemoProject\06_F1 Project Debug\04_letter_shell\Projects\letter_shell_cmd\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\FT32F0XX\../../../develop_lib/hardware/st7789/st7789.c\200</Expression>
+          <Expression>\\FT32F0XX\../main.c\39</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>43</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134220876</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>E:\宸ヤ綔\00_涓汉椤圭洰\01_瑙勫垝椤圭洰\00_Git\DemoProject\06_F1 Project Debug\04_letter_shell\Projects\letter_shell_cmd\main.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\FT32F0XX\../main.c\43</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -171,11 +187,6 @@
           <count>0</count>
           <WinNumber>1</WinNumber>
           <ItemText>p_drv</ItemText>
-        </Ww>
-        <Ww>
-          <count>1</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>((LCD_Type_8b_t *) ((uint32_t)(0x60000000 | 0x00FFFF)))</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
@@ -277,7 +288,7 @@
 
   <Group>
     <GroupName>app</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -312,8 +323,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\app\nt_shell_handler.c</PathWithFileName>
-      <FilenameWithoutPath>nt_shell_handler.c</FilenameWithoutPath>
+      <PathWithFileName>..\app\fsmc_8b.c</PathWithFileName>
+      <FilenameWithoutPath>fsmc_8b.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -324,8 +335,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\app\fsmc_8b.c</PathWithFileName>
-      <FilenameWithoutPath>fsmc_8b.c</FilenameWithoutPath>
+      <PathWithFileName>..\app\letter_shell_handler.c</PathWithFileName>
+      <FilenameWithoutPath>letter_shell_handler.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -809,7 +820,7 @@
 
   <Group>
     <GroupName>f1_lib</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -877,7 +888,7 @@
 
   <Group>
     <GroupName>cmd_function</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -902,6 +913,62 @@
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\..\develop_lib\user_command\cmd_list\cmd_list.c</PathWithFileName>
       <FilenameWithoutPath>cmd_list.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+  </Group>
+
+  <Group>
+    <GroupName>letter_shell</GroupName>
+    <tvExp>0</tvExp>
+    <tvExpOptDlg>0</tvExpOptDlg>
+    <cbSel>0</cbSel>
+    <RteFlg>0</RteFlg>
+    <File>
+      <GroupNumber>9</GroupNumber>
+      <FileNumber>52</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\develop_lib\third_lib\letter-shell\src\shell.c</PathWithFileName>
+      <FilenameWithoutPath>shell.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>9</GroupNumber>
+      <FileNumber>53</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\develop_lib\third_lib\letter-shell\src\shell_cmd_list.c</PathWithFileName>
+      <FilenameWithoutPath>shell_cmd_list.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>9</GroupNumber>
+      <FileNumber>54</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\develop_lib\third_lib\letter-shell\src\shell_companion.c</PathWithFileName>
+      <FilenameWithoutPath>shell_companion.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>9</GroupNumber>
+      <FileNumber>55</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\develop_lib\third_lib\letter-shell\src\shell_ext.c</PathWithFileName>
+      <FilenameWithoutPath>shell_ext.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

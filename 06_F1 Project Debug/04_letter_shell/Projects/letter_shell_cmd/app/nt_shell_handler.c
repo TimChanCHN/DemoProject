@@ -1,5 +1,6 @@
 #include "mid_usart.h"
 #include "board_config.h"
+#include "nt_shell_handler.h"
 
 
 static ntshell_t ntshell;
