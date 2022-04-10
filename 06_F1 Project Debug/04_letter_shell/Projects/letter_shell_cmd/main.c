@@ -23,7 +23,9 @@ int main(void)
 	init_letter_shell();
 
 	uint32_t i = mid_get_systick();
+	#if 0
 	uint8_t flag = 0;
+	#endif
 
 	Shell shell = get_shell();
 

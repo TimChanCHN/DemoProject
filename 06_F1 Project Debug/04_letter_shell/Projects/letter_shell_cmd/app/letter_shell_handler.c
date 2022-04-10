@@ -72,7 +72,6 @@ Shell get_shell(void)
 
 int init_letter_shell(void)
 {
-	uint8_t buff[10];
 
     usart_init(&m_usart_obj);
 
@@ -89,4 +88,5 @@ int init_letter_shell(void)
     //     usart_put_chars(&m_usart_obj, buff, 10);
     // }
     
+	return 1;
 }
